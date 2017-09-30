@@ -1,7 +1,13 @@
 <template>
   <div class="chat-page">
+
     <div class="container clearfix">
+      <div>
+        <button @click="doLogout" class="button button-clear">Logout</button>
+      </div>
+
       <div class="row">
+
         <div class="column column-25">
           <user-list :users="users"></user-list>
         </div>
@@ -102,6 +108,13 @@ export default {
         { id: 113, text: 'Well I am not sure. The rest of the team is not here yet. Maybe in an hour or so? Have you faced any problems at the last phase of the project?', 'sender': 1, datetime: '10:15 AM' },
         { id: 114, text: 'Actually everything was fine. I\'m very excited to show this to our team.', 'sender': 8, datetime: '10:16 AM' }
       ]
+    }
+  },
+  methods: {
+    doLogout({redirect}) {
+      this.$store.dispatch('logout')
+
+      this.$router.replace({ path: '/login' })
     }
   }
 }
