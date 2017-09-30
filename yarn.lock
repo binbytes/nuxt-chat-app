@@ -42,7 +42,7 @@
     "@nuxtjs/optimize" latest
     "@nuxtjs/workbox" latest
 
-"@nuxtjs/workbox@latest":
+"@nuxtjs/workbox@^1.2.0", "@nuxtjs/workbox@latest":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@nuxtjs/workbox/-/workbox-1.2.0.tgz#3db3a79b2e6e17c8659c45b81f4b0f366f82e9b4"
   dependencies:
