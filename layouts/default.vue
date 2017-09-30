@@ -17,5 +17,6 @@ export default {
   body {
     font: 14px/20px "Lato", Arial, sans-serif;
     margin: 0;
+    background: #C5DDEB;
   }
 </style>

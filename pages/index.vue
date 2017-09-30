@@ -81,7 +81,6 @@ $offline-color = #e38968
   color $offline-color
 
 .chat-page
-  background: #C5DDEB;
   color: white;
   padding: 40px 0;
   .coversation-section
