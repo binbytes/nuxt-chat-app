@@ -21,14 +21,14 @@
 // Curerntly we will not put logic, just bulit layout first
 export default {
   name: 'login',
-  data() {
+  data () {
     return {
       username: null,
       password: null
     }
   },
   methods: {
-    onSubmit( ) {
+    onSubmit () {
       // Put login logic & middleware call here
       this.$router.replace({ path: 'chats' })
     }

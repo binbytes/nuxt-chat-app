@@ -1,24 +1,8 @@
 <template>
   <div class="container clearfix">
     <div class="row">
-      <div class="people-list column column-25" id="people-list">
-        <div class="search">
-          <input type="text" placeholder="search" />
-          <i class="fa fa-search"></i>
-        </div>
-
-        <ul class="list">
-          <li class="clearfix" v-for="user in users" :key="user.id">
-            <img :src="user.avatar" alt="avatar" />
-            <div class="about">
-              <div class="name" v-text="user.name"></div>
-              <div class="status">
-                <!-- Let it be for now -->
-                <i class="fa fa-circle online"></i> online
-              </div>
-            </div>
-          </li>
-        </ul>
+      <div class="column column-25">
+        <user-list :users="users"></user-list>
       </div>
 
       <div class="chat column column-75">
@@ -26,8 +10,8 @@
           <img src="http://lorempixel.com/55/55/people/1/" alt="avatar" />
 
           <div class="chat-about">
-            <div class="chat-with">Chat with Vincent Porter</div>
-            <div class="chat-num-messages">already 1 902 messages</div>
+            <div class="chat-with">Chat with <span>Username Here</span></div>
+            <!-- <div class="chat-num-messages">already 1 902 messages</div> -->
           </div>
           <i class="fa fa-star"></i>
         </div>
@@ -35,53 +19,23 @@
 
         <div class="chat-history">
           <ul>
-            <li class="clearfix">
-              <div class="message-data align-right">
-                <span class="message-data-time">10:10 AM, Today</span> &nbsp; &nbsp;
-                <span class="message-data-name">Olia</span>
-                <i class="fa fa-circle me"></i>
-
-              </div>
-              <div class="message other-message float-right">
-                Hi Vincent, how are you? How is the project coming along?
-              </div>
-            </li>
-
-            <li>
+            <li :class="['clearfix', message.sender !== me.id ? 'other-message' : 'my-message']" v-for="message in messages" :key="message.id">
               <div class="message-data">
-                <span class="message-data-name">
-                  <i class="fa fa-circle online"></i> Vincent</span>
-                <span class="message-data-time">10:12 AM, Today</span>
+                <div v-if="message.sender === me.id">
+                  <span class="message-data-time" v-text="message.datetime"></span>
+                  <span class="message-data-name">Olia</span>
+                  <i class="fa fa-circle"></i>
+                </div>
+                <div v-else>
+                  <i class="fa fa-circle"></i>
+                  <span class="message-data-name">Olia</span>
+                  <span class="message-data-time" v-text="message.datetime"></span>
+                </div>
               </div>
-              <div class="message my-message">
-                Are we meeting today? Project has been already finished and I have results to show you.
-              </div>
+              <div class="message" v-text="message.text"></div>
             </li>
 
             <li class="clearfix">
-              <div class="message-data align-right">
-                <span class="message-data-time">10:14 AM, Today</span> &nbsp; &nbsp;
-                <span class="message-data-name">Olia</span>
-                <i class="fa fa-circle me"></i>
-
-              </div>
-              <div class="message other-message float-right">
-                Well I am not sure. The rest of the team is not here yet. Maybe in an hour or so? Have you faced any problems at the last phase of the project?
-              </div>
-            </li>
-
-            <li>
-              <div class="message-data">
-                <span class="message-data-name">
-                  <i class="fa fa-circle online"></i> Vincent</span>
-                <span class="message-data-time">10:20 AM, Today</span>
-              </div>
-              <div class="message my-message">
-                Actually everything was fine. I'm very excited to show this to our team.
-              </div>
-            </li>
-
-            <li>
               <div class="message-data">
                 <span class="message-data-name">
                   <i class="fa fa-circle online"></i> Vincent</span>
@@ -91,9 +45,7 @@
               <i class="fa fa-circle online" style="color: #AED2A6"></i>
               <i class="fa fa-circle online" style="color:#DAE9DA"></i>
             </li>
-
           </ul>
-
         </div>
         <!-- end chat-history -->
 
@@ -116,10 +68,21 @@
 
 <script>
 // Curerntly we will not put logic, just bulit layout first
+
+import UserList from '@/components/UserList'
+
 export default {
   name: 'chat-view',
-  data() {
+  components: {
+    UserList
+  },
+  data () {
     return {
+      me: {
+        id: 8,
+        name: 'Nik Bennett',
+        avatar: 'http://lorempixel.com/55/55/people/8/'
+      },
       users: [
         { id: 1, name: 'Joan Pearson', avatar: 'http://lorempixel.com/55/55/people/1/' },
         { id: 2, name: 'Ruth Kelly', avatar: 'http://lorempixel.com/55/55/people/2/' },
@@ -128,6 +91,12 @@ export default {
         { id: 5, name: 'David Walker', avatar: 'http://lorempixel.com/55/55/people/5/' },
         { id: 6, name: 'Aaron Gutierrez', avatar: 'http://lorempixel.com/55/55/people/6/' },
         { id: 7, name: 'Margaret Pearson', avatar: 'http://lorempixel.com/55/55/people/7/' }
+      ],
+      messages: [
+        {id: 111, text: 'Hi, how are you? How is the project coming along?', 'sender': 1, datetime: '10:12 AM'},
+        {id: 112, text: 'Are we meeting today? Project has been already finished and I have results to show you.', 'sender': 8, datetime: '10:14 AM'},
+        {id: 113, text: 'Well I am not sure. The rest of the team is not here yet. Maybe in an hour or so? Have you faced any problems at the last phase of the project?', 'sender': 1, datetime: '10:15 AM'},
+        {id: 114, text: 'Actually everything was fine. I\'m very excited to show this to our team.', 'sender': 8, datetime: '10:16 AM'}
       ]
     }
   },
@@ -138,202 +107,148 @@ export default {
 </script>
 
 <style lang="stylus">
-$color-1 = #444753
-$color-2 = #6a6c75
-$color-3 = #92959e
-$color-4 = #f2f5f8
-$color-5 = #4a4a4a
-$color-6 = #d8dadf
-$color-7 = #a8aab1
-$color-8 = #86bb71
-$color-9 = #94c2ed
-$color-10 = #fff
-$color-11 = #000
-$color-12 = #e38968
+$chat-bg = #ffffff
+$box-border = rgba(74, 70, 70, 0.08)
+$text-color = #434651
+$offline-color = #e38968
+$star-color = #d8dadf
+$message-time = #a8aab1
+$green-color = #86bb71
+$blue-color = #94c2ed
 
 ul
-    list-style none
+  list-style none
 
-.people-list
-    background $color-1
-    width 260px
-    float left
+.chat
+  width 490px
+  background $chat-bg
+  border-top-right-radius 5px
+  border-bottom-right-radius 5px
+  color $text-color
 
-    .search
-        padding 20px
-
-    input
-        border-radius 3px
-        border none
-        padding 14px
-        color white
-        background $color-2
-        width 90%
-        font-size 14px
-
-    .fa-search
-        position relative
-        left -25px
-        color white
-
-    ul
-        height 770px
-        overflow-y auto
-
-        li
-            padding-bottom 20px
+  .chat-header
+    padding 20px
+    border-bottom 2px solid $box-border
 
     img
       float left
-      border-radius 50%
 
-    .about
-        float left
-        margin-top 8px
-        padding-left 8px
+    .chat-about
+      float left
+      padding-left 10px
+      margin-top 6px
 
-    .status
-        color $color-3
+    .chat-with
+      font-weight 700
+      font-size 16px
 
-.chat
-    width 490px
-    background $color-4
-    border-top-right-radius 5px
-    border-bottom-right-radius 5px
-    color $color-5
+    .fa-star
+      float right
+      color $star-color
+      font-size 20px
+      margin-top 12px
 
-    .chat-header
-        padding 20px
-        border-bottom 2px solid white
+  .chat-history
+    padding 30px 30px 20px
+    border-bottom 2px solid $box-border
+    overflow-y scroll
+    height 575px
 
-        img
-            float left
+    li
+      .message-data
+        margin-bottom 15px
+        .fa-circle
+          margin-right 3px
+          font-size 10px
 
-        .chat-about
-            float left
-            padding-left 10px
-            margin-top 6px
+      .message-data-time
+        color $message-time
+        padding-left 6px
+        margin-right 6px
 
-        .chat-with
-            font-weight bold
-            font-size 16px
+      .message-data-name
+        margin-right 7px
 
-        .chat-num-messages
-            color $color-3
+      .message
+        color white
+        padding 18px 20px
+        line-height 26px
+        font-size 16px
+        border-radius 7px
+        margin-bottom 30px
+        position relative
+        width 90%
 
-        .fa-star
-            float right
-            color $color-6
-            font-size 20px
-            margin-top 12px
+        &:after
+          bottom 100%
+          left 7%
+          border solid transparent
+          content " "
+          height 0
+          width 0
+          position absolute
+          pointer-events none
+          border-bottom-color $green-color
+          border-width 10px
+          margin-left -10px
 
-    .chat-history
-        padding 30px 30px 20px
-        border-bottom 2px solid white
-        overflow-y scroll
-        height 575px
-
-        .message-data
-            margin-bottom 15px
-
-        .message-data-time
-            color $color-7
-            padding-left 6px
-
+      &.my-message
+        text-align right
+        .fa-circle
+          color $blue-color
         .message
-            color white
-            padding 18px 20px
-            line-height 26px
-            font-size 16px
-            border-radius 7px
-            margin-bottom 30px
-            width 90%
-            position relative
+          float right
+          background $blue-color
+          &:after
+            left: 97%;
+            border-bottom-color $blue-color
 
-            &:after
-                bottom 100%
-                left 7%
-                border solid transparent
-                content " "
-                height 0
-                width 0
-                position absolute
-                pointer-events none
-                border-bottom-color $color-8
-                border-width 10px
-                margin-left -10px
+      &.other-message
+        .fa-circle
+          color $green-color
+        .message
+          background $green-color
 
-        .my-message
-            background $color-8
+  .chat-message
+    padding 30px
 
-        .other-message
-            background $color-9
+    textarea
+      width 100%
+      border none
+      padding 10px 20px
+      margin-bottom 10px
+      border-radius 5px
+      resize none
+      background $box-border
 
-            &:after
-                border-bottom-color $color-9
-                left 93%
+    button
+      float right
+      color #ffffff
+      font-size 16px
+      text-transform uppercase
+      border none
+      cursor pointer
+      font-weight 700
+      background $blue-color
 
-    .chat-message
-        padding 30px
-
-        textarea
-            width 100%
-            border none
-            padding 10px 20px
-            margin-bottom 10px
-            border-radius 5px
-            resize none
-            background white
-
-        button
-            float right
-            color $color-10
-            font-size 16px
-            text-transform uppercase
-            border none
-            cursor pointer
-            font-weight bold
-            background $color-9
-
-            &:hover
-                color $color-11
-
-.chat .chat-message .fa-file-o
 .chat .chat-message .fa-file-image-o
-    font-size 16px
-    color gray
-    cursor pointer
-
-.online
-.offline
-.me
-    margin-right 3px
-    font-size 10px
-
-.online
-    color $color-8
-
-.offline
-    color $color-12
+.chat .chat-message .fa-file-o
+  font-size 16px
+  color gray
+  cursor pointer
 
 .me
-    color $color-9
+.offline
+.online
+  margin-right 3px
+  font-size 10px
 
-.align-left
-    text-align left
+.online
+  color $green-color
 
-.align-right
-    text-align right
+.offline
+  color $offline-color
 
-.float-right
-    float right
-
-.clearfix
-  &:after
-    visibility hidden
-    display block
-    font-size 0
-    content " "
-    clear both
-    height 0
+.me
+  color $blue-color
 </style>

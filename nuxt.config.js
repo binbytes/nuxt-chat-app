@@ -2,7 +2,21 @@ module.exports = {
   /*
   ** Build configuration
   */
-  build: {},
+  build: {
+    /*
+    ** Run ESLINT on save
+    */
+    extend (config, ctx) {
+      if (ctx.isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/
+        })
+      }
+    }
+  },
   /*
   ** Headers
   ** Common headers are already provided by @nuxtjs/pwa preset
@@ -31,5 +45,15 @@ module.exports = {
   */
   modules: [
     '@nuxtjs/pwa'
-  ]
+  ],
+  render: {
+    static: {
+      maxAge: '1y',
+      setHeaders (res, path) {
+        if (path.includes('sw.js')) {
+          res.setHeader('Cache-Control', 'public, max-age=0')
+        }
+      }
+    }
+  }
 }
