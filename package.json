@@ -5,8 +5,9 @@
   "author": "Nikunj Kanetiya <kanetiya@gmail.com>",
   "private": true,
   "dependencies": {
-    "nuxt": "latest",
-    "@nuxtjs/pwa": "latest"
+    "@nuxtjs/pwa": "latest",
+    "milligram": "^1.3.0",
+    "nuxt": "latest"
   },
   "scripts": {
     "dev": "nuxt",
