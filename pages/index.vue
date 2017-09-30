@@ -13,7 +13,7 @@
 
         <div class="column coversation-section column-75">
 
-          <chat v-if="conversationUser" :messages="messages" :me="me" :conversationUser="conversationUser"></chat>
+          <chat v-if="conversationUser" :me="me" :conversationUser="conversationUser"></chat>
 
           <div v-else>
             <h3 class="info">Please select to start conversation</h3>
@@ -57,12 +57,6 @@ export default {
         { id: 5, name: 'David Walker', avatar: 'http://lorempixel.com/55/55/people/5/' },
         { id: 6, name: 'Aaron Gutierrez', avatar: 'http://lorempixel.com/55/55/people/6/' },
         { id: 7, name: 'Margaret Pearson', avatar: 'http://lorempixel.com/55/55/people/7/' }
-      ],
-      messages: [
-        { id: 111, text: 'Hi, how are you? How is the project coming along?', 'sender': 1, datetime: '10:12 AM' },
-        { id: 112, text: 'Are we meeting today? Project has been already finished and I have results to show you.', 'sender': 8, datetime: '10:14 AM' },
-        { id: 113, text: 'Well I am not sure. The rest of the team is not here yet. Maybe in an hour or so? Have you faced any problems at the last phase of the project?', 'sender': 1, datetime: '10:15 AM' },
-        { id: 114, text: 'Actually everything was fine. I\'m very excited to show this to our team.', 'sender': 8, datetime: '10:16 AM' }
       ]
     }
   },

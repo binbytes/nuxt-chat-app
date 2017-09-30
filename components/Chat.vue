@@ -12,7 +12,7 @@
     </div>
     <!-- end chat-header -->
 
-    <chat-history></chat-history>
+    <chat-history :me="me" :conversationUser="conversationUser"></chat-history>
 
     <chat-new-message></chat-new-message>
   </div>
