@@ -10,7 +10,9 @@
           <img src="http://lorempixel.com/55/55/people/1/" alt="avatar" />
 
           <div class="chat-about">
-            <div class="chat-with">Chat with <span>Username Here</span></div>
+            <div class="chat-with">Chat with
+              <span>Username Here</span>
+            </div>
             <!-- <div class="chat-num-messages">already 1 902 messages</div> -->
           </div>
           <i class="fa fa-star"></i>
@@ -38,12 +40,12 @@
             <li class="clearfix">
               <div class="message-data">
                 <span class="message-data-name">
-                  <i class="fa fa-circle online"></i> Vincent</span>
-                <span class="message-data-time">10:31 AM, Today</span>
+                  <i class="fa fa-circle online"></i> Username</span>
+                <span class="message-data-time">Current Time</span>
               </div>
               <i class="fa fa-circle online"></i>
               <i class="fa fa-circle online" style="color: #AED2A6"></i>
-              <i class="fa fa-circle online" style="color:#DAE9DA"></i>
+              <i class="fa fa-circle online" style="color: #DAE9DA"></i>
             </li>
           </ul>
         </div>
@@ -76,7 +78,7 @@ export default {
   components: {
     UserList
   },
-  data () {
+  data() {
     return {
       me: {
         id: 8,
@@ -93,15 +95,12 @@ export default {
         { id: 7, name: 'Margaret Pearson', avatar: 'http://lorempixel.com/55/55/people/7/' }
       ],
       messages: [
-        {id: 111, text: 'Hi, how are you? How is the project coming along?', 'sender': 1, datetime: '10:12 AM'},
-        {id: 112, text: 'Are we meeting today? Project has been already finished and I have results to show you.', 'sender': 8, datetime: '10:14 AM'},
-        {id: 113, text: 'Well I am not sure. The rest of the team is not here yet. Maybe in an hour or so? Have you faced any problems at the last phase of the project?', 'sender': 1, datetime: '10:15 AM'},
-        {id: 114, text: 'Actually everything was fine. I\'m very excited to show this to our team.', 'sender': 8, datetime: '10:16 AM'}
+        { id: 111, text: 'Hi, how are you? How is the project coming along?', 'sender': 1, datetime: '10:12 AM' },
+        { id: 112, text: 'Are we meeting today? Project has been already finished and I have results to show you.', 'sender': 8, datetime: '10:14 AM' },
+        { id: 113, text: 'Well I am not sure. The rest of the team is not here yet. Maybe in an hour or so? Have you faced any problems at the last phase of the project?', 'sender': 1, datetime: '10:15 AM' },
+        { id: 114, text: 'Actually everything was fine. I\'m very excited to show this to our team.', 'sender': 8, datetime: '10:16 AM' }
       ]
     }
-  },
-  computed: {
-    // Use static avatar for now
   }
 }
 </script>
