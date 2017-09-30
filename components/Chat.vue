@@ -62,7 +62,6 @@ export default {
     scrollBottom: {
       componentUpdated(el) {
         el.scrollTop = el.scrollHeight
-        console.log(el.scrollHeight)
       }
     }
   }
