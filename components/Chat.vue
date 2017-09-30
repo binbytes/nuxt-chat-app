@@ -12,7 +12,7 @@
     </div>
     <!-- end chat-header -->
 
-    <div class="chat-history">
+    <div class="chat-history" v-scroll-bottom>
       <ul>
         <template v-for="message in messages">
           <chat-message :me="me" :message="message" :key="message.id"></chat-message>
@@ -56,6 +56,14 @@ export default {
         sender: this.me.id,
         datetime: date.getHours() + ':' + date.getMinutes()
       })
+    }
+  },
+  directives: {
+    scrollBottom: {
+      componentUpdated(el) {
+        el.scrollTop = el.scrollHeight
+        console.log(el.scrollHeight)
+      }
     }
   }
 }
