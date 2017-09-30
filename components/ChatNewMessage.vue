@@ -1,16 +1,29 @@
 <template>
   <div class="chat-message clearfix">
-    <textarea name="message-to-send" id="message-to-send" placeholder="Type your message" rows="3"></textarea>
+    <textarea v-model="messageText" placeholder="Type your message" @keyup.enter="sendMessage" rows="3"></textarea>
 
     <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
     <i class="fa fa-file-image-o"></i>
 
-    <button class="button button-primary">Send</button>
+    <button @click="sendMessage" class="button button-primary">Send</button>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'chat-new-message'
+  name: 'chat-new-message',
+  data() {
+    return {
+      messageText: null
+    }
+  },
+  methods: {
+    sendMessage() {
+      if (this.messageText !== null) {
+        this.$emit('newMessage', this.messageText)
+        this.messageText = null
+      }
+    }
+  }
 }
 </script>
