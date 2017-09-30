@@ -197,11 +197,5 @@ $blue-color = #94c2ed
   cursor pointer
 
 .me
-.offline
-.online
-  margin-right 3px
-  font-size 10px
-
-.me
   color $blue-color
 </style>

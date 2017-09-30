@@ -79,6 +79,12 @@ $offline-color = #e38968
 .offline
   color $offline-color
 
+.me
+.offline
+.online
+  margin-right 3px
+  font-size 10px
+
 .chat-page
   padding: 40px 0;
   .coversation-section
