@@ -6,8 +6,8 @@
     </div>
 
     <ul class="list">
-      <li class="clearfix" v-for="user in users" :key="user.id">
-        <img :src="user.avatar" alt="avatar" />
+      <li :class="['clearfix', conversationUserId === user.id ? 'active' : '']" v-for="user in users" :key="user.id" @click="selectUserForConversation(user.id)">
+        <img :src="user.avatar" alt="avatar"/>
         <div class="about">
           <div class="name" v-text="user.name"></div>
           <div class="status">
@@ -24,8 +24,13 @@
 export default {
   name: 'user-list',
   props: [
-    'users'
-  ]
+    'users', 'conversationUserId'
+  ],
+  methods: {
+    selectUserForConversation(userId) {
+      this.$emit('update:conversationUserId', userId)
+    }
+  }
 }
 </script>
 
