@@ -16,7 +16,7 @@
           <chat v-if="conversationUser" :me="me" :conversationUser="conversationUser"></chat>
 
           <div v-else>
-            <h3 class="info">Please select to start conversation</h3>
+            <h3 class="info">Welcome {{ me.name }}, Please select to start conversation</h3>
           </div>
         </div>
       </div>
@@ -44,11 +44,7 @@ export default {
   data() {
     return {
       conversationUserId: null,
-      me: {
-        id: 8,
-        name: 'Nik Bennett',
-        avatar: 'http://lorempixel.com/55/55/people/8/'
-      },
+      me: this.$store.state.user,
       users: [
         { id: 1, name: 'Joan Pearson', avatar: 'http://lorempixel.com/55/55/people/1/' },
         { id: 2, name: 'Ruth Kelly', avatar: 'http://lorempixel.com/55/55/people/2/' },

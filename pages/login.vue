@@ -20,7 +20,6 @@
 </template>
 
 <script>
-// Curerntly we will not put logic, just bulit layout first
 export default {
   name: 'login',
   middleware: 'no-auth',
@@ -49,9 +48,17 @@ export default {
         return
       }
 
-      // Put login logic & middleware call here
-      this.$store.dispatch('login')
+      this.$store.dispatch('login', this.getData())
       this.$router.replace({ path: '/' })
+    },
+    getData() {
+      return {
+        id: 123,
+        name: this.username, // Use static name for now
+        username: this.username,
+        password: this.password,
+        avatar: 'http://lorempixel.com/55/55/people/8/'
+      }
     }
   }
 }

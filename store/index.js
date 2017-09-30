@@ -80,7 +80,7 @@ const authStore = () => {
         await dispatch('updateToken', null)
       },
 
-      async fetch({ state, commit, dispatch }) {
+      async fetch({ state, commit, dispatch }, userData) {
         // Fetch and update latest token
         await dispatch('fetchToken')
 
@@ -91,10 +91,15 @@ const authStore = () => {
 
         // Try to get user profile
         try {
-          const userData = {
-            'id': 121,
-            'username': 'binbytes',
-            'name': 'binbytes technolabs'
+          if (!userData) {
+            // Use static data we don't using api call right now
+            userData = {
+              id: 123,
+              name: 'BinBytes', // Use static name for now
+              username: 'binbytes',
+              password: '!23%12#ahYfs5ahs$5ahd!za@',
+              avatar: 'http://lorempixel.com/55/55/people/8/'
+            }
           }
           commit('SET_USER', userData)
         } catch (e) {
@@ -103,12 +108,12 @@ const authStore = () => {
       },
 
       // Login
-      async login({ dispatch }) {
-        // set testing token
-        await dispatch('updateToken', 'test_token')
+      async login({ dispatch }, userData) {
+        // set random token
+        await dispatch('updateToken', Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15))
 
         // Fetch authenticated user
-        await dispatch('fetch')
+        await dispatch('fetch', userData)
       },
 
       // Logout
