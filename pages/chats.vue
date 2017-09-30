@@ -8,11 +8,12 @@
         </div>
 
         <ul class="list">
-          <li class="clearfix">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt="avatar" />
+          <li class="clearfix" v-for="user in users" :key="user.id">
+            <img :src="user.avatar" alt="avatar" />
             <div class="about">
-              <div class="name">Vincent Porter</div>
+              <div class="name" v-text="user.name"></div>
               <div class="status">
+                <!-- Let it be for now -->
                 <i class="fa fa-circle online"></i> online
               </div>
             </div>
@@ -22,7 +23,7 @@
 
       <div class="chat column column-75">
         <div class="chat-header clearfix">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" />
+          <img src="http://lorempixel.com/55/55/people/1/" alt="avatar" />
 
           <div class="chat-about">
             <div class="chat-with">Chat with Vincent Porter</div>
@@ -120,16 +121,18 @@ export default {
   data() {
     return {
       users: [
-        { id: 1, name: 'Joan Pearson' },
-        { id: 2, name: 'Ruth Kelly' },
-        { id: 3, name: 'Dennis Bennett' },
-        { id: 4, name: 'Julia Munoz' },
-        { id: 5, name: 'David Walker' },
-        { id: 6, name: 'Aaron Gutierrez' },
-        { id: 7, name: 'Margaret Pearson' },
-        { id: 8, name: 'Carolyn Reynolds' }
+        { id: 1, name: 'Joan Pearson', avatar: 'http://lorempixel.com/55/55/people/1/' },
+        { id: 2, name: 'Ruth Kelly', avatar: 'http://lorempixel.com/55/55/people/2/' },
+        { id: 3, name: 'Dennis Bennett', avatar: 'http://lorempixel.com/55/55/people/3/' },
+        { id: 4, name: 'Julia Munoz', avatar: 'http://lorempixel.com/55/55/people/4/' },
+        { id: 5, name: 'David Walker', avatar: 'http://lorempixel.com/55/55/people/5/' },
+        { id: 6, name: 'Aaron Gutierrez', avatar: 'http://lorempixel.com/55/55/people/6/' },
+        { id: 7, name: 'Margaret Pearson', avatar: 'http://lorempixel.com/55/55/people/7/' }
       ]
     }
+  },
+  computed: {
+    // Use static avatar for now
   }
 }
 </script>
@@ -181,7 +184,8 @@ ul
             padding-bottom 20px
 
     img
-        float left
+      float left
+      border-radius 50%
 
     .about
         float left
