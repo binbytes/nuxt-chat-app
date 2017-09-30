@@ -46,6 +46,12 @@ module.exports = {
   modules: [
     '@nuxtjs/pwa'
   ],
+  /*
+  ** Plugins
+  */
+  plugins: [
+    '~/plugins/auth.js'
+  ],
   render: {
     static: {
       maxAge: '1y',

@@ -4,12 +4,18 @@
   </div>
 </template>
 
+<script>
+export default {
+  asyncData({store}) {
+    return store.dispatch('fetch')
+  }
+}
+</script>
+
+
 <style>
   body {
     font: 14px/20px "Lato", Arial, sans-serif;
-    background: #C5DDEB;
-    color: white;
     margin: 0;
-    padding: 40px 0;
   }
 </style>
