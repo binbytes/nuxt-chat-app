@@ -16,7 +16,7 @@
   </li>
 </template>
 
-<<script>
+<script>
 export default {
   props: [
     'me', 'message', 'conversationUser'
