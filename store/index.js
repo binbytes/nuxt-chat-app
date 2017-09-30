@@ -94,7 +94,7 @@ const authStore = () => {
           if (!userData) {
             // Use static data we don't using api call right now
             userData = {
-              id: 123,
+              id: 8,
               name: 'BinBytes', // Use static name for now
               username: 'binbytes',
               password: '!23%12#ahYfs5ahs$5ahd!za@',

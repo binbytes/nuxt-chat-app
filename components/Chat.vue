@@ -15,7 +15,7 @@
     <div class="chat-history" v-scroll-bottom>
       <ul>
         <template v-for="message in messages">
-          <chat-message :me="me" :message="message" :key="message.id"></chat-message>
+          <chat-message :me="me" :conversationUser="conversationUser" :message="message" :key="message.id"></chat-message>
         </template>
       </ul>
     </div>

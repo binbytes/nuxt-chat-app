@@ -74,6 +74,9 @@ $status-text-color = #92959E
     margin-top 8px
     padding-left 8px
 
+  .name
+    color: white;
+
   .status
     color $status-text-color
 

@@ -1,9 +1,12 @@
 <template>
   <div class="chat-page">
 
-    <div class="container clearfix">
-      <div>
+    <div class="container">
+      <div class="clearfix">
         <button @click="doLogout" class="button button-clear">Logout</button>
+        <h5 class="float-right">
+          Welcome {{ me.name }}
+        </h5>
       </div>
 
       <div class="row">
@@ -16,7 +19,7 @@
           <chat v-if="conversationUser" :me="me" :conversationUser="conversationUser"></chat>
 
           <div v-else>
-            <h3 class="info">Welcome {{ me.name }}, Please select to start conversation</h3>
+            <h3 class="info">Please select to start conversation</h3>
           </div>
         </div>
       </div>
@@ -77,7 +80,6 @@ $offline-color = #e38968
   color $offline-color
 
 .chat-page
-  color: white;
   padding: 40px 0;
   .coversation-section
     background white
