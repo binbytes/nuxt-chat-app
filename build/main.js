@@ -82,9 +82,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nuxt__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nuxt___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_nuxt__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__routes__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_body_parser__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_body_parser__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_body_parser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_body_parser__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_express_session__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_express_session__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_express_session___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_express_session__);
 
 
@@ -110,7 +110,7 @@ app.use(__WEBPACK_IMPORTED_MODULE_4_express_session___default()({
 app.use('/api', __WEBPACK_IMPORTED_MODULE_2__routes__["a" /* default */]);
 
 // Import and Set Nuxt.js options
-var config = __webpack_require__(6);
+var config = __webpack_require__(8);
 config.dev = !("development" === 'production');
 
 // Init Nuxt.js
@@ -228,12 +228,25 @@ router.post('/logout', function (req, res) {
 /* 6 */
 /***/ (function(module, exports) {
 
+module.exports = require("body-parser");
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+module.exports = require("express-session");
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
 module.exports = {
   /*
   ** Headers
   ** Common headers are already provided by @nuxtjs/pwa preset
   */
   head: {
+    title: 'BinBytes - Chat App',
     link: [{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Lato:400,700' }, { rel: 'stylesheet', href: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css' }]
   },
   /*
@@ -258,18 +271,6 @@ module.exports = {
     baseURL: process.env.baseURL || 'http://' + (process.env.HOST || 'localhost') + ':' + (process.env.PORT || 3000)
   }
 };
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-module.exports = require("body-parser");
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports) {
-
-module.exports = require("express-session");
 
 /***/ })
 /******/ ]);

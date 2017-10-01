@@ -31,7 +31,6 @@
 // Curerntly we will not put logic, just bulit layout first
 import UserList from '@/components/UserList'
 import Chat from '@/components/Chat'
-import axios from 'axios'
 
 export default {
   name: 'chat-view',
@@ -45,11 +44,10 @@ export default {
       return this.conversationUserId ? this.users.find(u => u.id === this.conversationUserId) : null
     }
   },
-  asyncData() {
-    return axios.get('/api/users')
-      .then(res => {
-        return {users: res.data}
-      })
+  async asyncData({ app }) {
+    const users = await app.$axios.$get('/api/users')
+
+    return {users}
   },
   data() {
     return {

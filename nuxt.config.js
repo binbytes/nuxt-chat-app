@@ -4,6 +4,7 @@ module.exports = {
   ** Common headers are already provided by @nuxtjs/pwa preset
   */
   head: {
+    title: 'BinBytes - Chat App',
     link: [
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Lato:400,700' },
       { rel: 'stylesheet', href: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css' }
