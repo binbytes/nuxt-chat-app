@@ -5,6 +5,7 @@
   "author": "Nikunj Kanetiya <kanetiya@gmail.com>",
   "private": true,
   "dependencies": {
+    "@nuxtjs/axios": "^4.4.0",
     "@nuxtjs/pwa": "latest",
     "cookie": "^0.3.1",
     "js-cookie": "^2.1.4",

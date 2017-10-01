@@ -55,7 +55,7 @@ const authStore = () => {
         }
       },
 
-      fetchToken({ dispatch }) {
+      async fetchToken({ dispatch }) {
         let token
 
         // First try localStorage
@@ -65,7 +65,7 @@ const authStore = () => {
 
         // Then try to extract token from cookies
         if (!token) {
-          const cookieStr = process.browser ? document.cookie : this.$ctx.req.headers.cookie
+          const cookieStr = process.browser ? document.cookie : null
           const cookies = Cookie.parse(cookieStr || '') || {}
           token = cookies.token
         }
@@ -102,6 +102,8 @@ const authStore = () => {
             }
           }
           commit('SET_USER', userData)
+
+          console.log('asd')
         } catch (e) {
           return dispatch('invalidate')
         }

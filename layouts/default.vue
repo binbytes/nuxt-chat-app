@@ -6,12 +6,9 @@
 
 <script>
 export default {
-  asyncData({store}) {
-    return store.dispatch('fetch')
-  }
+  name: 'default-layout'
 }
 </script>
-
 
 <style>
   body {

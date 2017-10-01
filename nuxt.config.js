@@ -44,7 +44,8 @@ module.exports = {
   ** Modules
   */
   modules: [
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/axios'
   ],
   /*
   ** Plugins
@@ -52,14 +53,10 @@ module.exports = {
   plugins: [
     '~/plugins/auth.js'
   ],
-  render: {
-    static: {
-      maxAge: '1y',
-      setHeaders (res, path) {
-        if (path.includes('sw.js')) {
-          res.setHeader('Cache-Control', 'public, max-age=0')
-        }
-      }
-    }
+  /*
+  ** Axios settings
+  */
+  axios: {
+    baseURL: process.env.baseURL || `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3002}`
   }
 }
