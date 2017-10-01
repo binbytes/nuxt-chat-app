@@ -1,22 +1,7 @@
+const bodyParser = require('body-parser')
+const session = require('express-session')
+
 module.exports = {
-  /*
-  ** Build configuration
-  */
-  build: {
-    /*
-    ** Run ESLINT on save
-    */
-    extend (config, ctx) {
-      if (ctx.isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
-      }
-    }
-  },
   /*
   ** Headers
   ** Common headers are already provided by @nuxtjs/pwa preset
@@ -48,15 +33,23 @@ module.exports = {
     '@nuxtjs/axios'
   ],
   /*
-  ** Plugins
-  */
-  plugins: [
-    '~/plugins/auth.js'
-  ],
-  /*
   ** Axios settings
   */
   axios: {
-    baseURL: process.env.baseURL || `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3002}`
-  }
+    baseURL: process.env.baseURL || `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3000}`
+  },
+  serverMiddleware: [
+    // body-parser middleware
+    bodyParser.json(),
+    // session middleware
+    session({
+      secret: 'super-secret-key',
+      resave: false,
+      saveUninitialized: false,
+      cookie: { maxAge: 60000 }
+    }),
+    // Api middleware
+    // We add /api/login & /api/logout routes
+    '~/api'
+  ]
 }

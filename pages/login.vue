@@ -32,7 +32,7 @@ export default {
     }
   },
   methods: {
-    onSubmit() {
+    async onSubmit() {
       // Clear the previous errors
       this.errors = {}
 
@@ -48,8 +48,12 @@ export default {
         return
       }
 
-      this.$store.dispatch('login', this.getData())
-      this.$router.replace({ path: '/' })
+      try {
+        await this.$store.dispatch('login', this.$data)
+        this.$router.replace({ path: '/' })
+      } catch (e) {
+
+      }
     },
     getData() {
       return {
