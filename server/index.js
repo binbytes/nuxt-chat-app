@@ -7,6 +7,18 @@ import session from 'express-session'
 const app = express()
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
+const server = require('http').createServer(app)
+
+const io = require('socket.io').listen(server)
+
+io.on('connection', (socket) => {
+  console.log('client conncted')
+
+  socket.on('send-message', function(message) {
+    socket.broadcast.emit('new-message', message)
+  })
+})
+
 app.set('port', port)
 
 app.use(bodyParser.json())
@@ -38,5 +50,6 @@ if (config.dev) {
 app.use(nuxt.render)
 
 // Listen the server
-app.listen(port, host)
+// app.listen(port, host)
+server.listen(port, host)
 console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console

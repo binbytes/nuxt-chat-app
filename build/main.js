@@ -95,6 +95,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var app = __WEBPACK_IMPORTED_MODULE_0_express___default()();
 var host = process.env.HOST || '127.0.0.1';
 var port = process.env.PORT || 3000;
+var server = __webpack_require__(8).createServer(app);
+
+var io = __webpack_require__(9).listen(server);
+
+io.on('connection', function (socket) {
+  console.log('client conncted');
+
+  socket.on('send-message', function (message) {
+    socket.broadcast.emit('new-message', message);
+  });
+});
+
 app.set('port', port);
 
 app.use(__WEBPACK_IMPORTED_MODULE_3_body_parser___default.a.json());
@@ -110,7 +122,7 @@ app.use(__WEBPACK_IMPORTED_MODULE_4_express_session___default()({
 app.use('/api', __WEBPACK_IMPORTED_MODULE_2__routes__["a" /* default */]);
 
 // Import and Set Nuxt.js options
-var config = __webpack_require__(8);
+var config = __webpack_require__(10);
 config.dev = !("development" === 'production');
 
 // Init Nuxt.js
@@ -126,7 +138,8 @@ if (config.dev) {
 app.use(nuxt.render);
 
 // Listen the server
-app.listen(port, host);
+// app.listen(port, host)
+server.listen(port, host);
 console.log('Server listening on ' + host + ':' + port); // eslint-disable-line no-console
 
 /***/ }),
@@ -240,6 +253,18 @@ module.exports = require("express-session");
 /* 8 */
 /***/ (function(module, exports) {
 
+module.exports = require("http");
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+module.exports = require("socket.io");
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
 module.exports = {
   /*
   ** Headers
@@ -265,10 +290,17 @@ module.exports = {
   */
   modules: ['@nuxtjs/pwa', '@nuxtjs/axios'],
   /*
+  ** Plugins
+  */
+  plugins: ['~plugins/socket.io'],
+  /*
   ** Axios settings
   */
   axios: {
-    baseURL: process.env.baseURL || 'http://' + (process.env.HOST || 'localhost') + ':' + (process.env.PORT || 3000)
+    baseURL: process.env.HOST_URL || 'http://' + (process.env.HOST || 'localhost') + ':' + (process.env.HOST_URL || 3000)
+  },
+  env: {
+    HOST_URL: process.env.HOST_URL || 'http://localhost:3000'
   }
 };
 

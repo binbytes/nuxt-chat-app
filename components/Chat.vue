@@ -27,6 +27,7 @@
 <script>
 import ChatNewMessage from './ChatNewMessage'
 import ChatMessage from './ChatMessage'
+import socket from '@/plugins/socket.io'
 
 export default {
   name: 'chat',
@@ -36,6 +37,12 @@ export default {
   components: {
     ChatNewMessage,
     ChatMessage
+  },
+  beforeMount () {
+    socket.on('new-message', (message) => {
+      console.log('got new message', message)
+      this.messages.push(message)
+    })
   },
   data() {
     return {
@@ -50,12 +57,14 @@ export default {
   methods: {
     pushMessage(message) {
       const date = new Date()
-      this.messages.push({
+      const newMessage = {
         id: 123,
         text: message,
         sender: this.me.id,
         datetime: date.getHours() + ':' + date.getMinutes()
-      })
+      }
+      this.messages.push(newMessage)
+      socket.emit('send-message', newMessage)
     }
   },
   directives: {

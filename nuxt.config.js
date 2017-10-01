@@ -31,9 +31,18 @@ module.exports = {
     '@nuxtjs/axios'
   ],
   /*
+  ** Plugins
+  */
+  plugins: [
+    '~plugins/socket.io'
+  ],
+  /*
   ** Axios settings
   */
   axios: {
-    baseURL: process.env.baseURL || `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3000}`
+    baseURL: process.env.HOST_URL || `http://${process.env.HOST || 'localhost'}:${process.env.HOST_URL || 3000}`
+  },
+  env: {
+    HOST_URL: process.env.HOST_URL || 'http://localhost:3000'
   }
 }
