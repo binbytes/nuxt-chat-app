@@ -8,7 +8,7 @@ const port = process.env.PORT || 3000
 
 app.use(bodyParser.json())
 app.use(session({
-  secret: 'super-secret-key',
+  secret: process.env.secretKey || 'kcw2KgBrbuYeLTOo8rXnq1FgRpFXQFaS7CigmgctzNfojD5D3eJ7tY62axBuFICn',
   resave: false,
   saveUninitialized: false,
   cookie: { maxAge: 60000 }
