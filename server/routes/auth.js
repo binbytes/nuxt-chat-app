@@ -1,4 +1,5 @@
-const {Router} = require('express')
+import { Router } from 'express'
+
 const router = Router()
 
 // Add POST - /api/login
@@ -24,4 +25,4 @@ router.post('/logout', (req, res) => {
   res.json({ ok: true })
 })
 
-module.exports = router
+export default router

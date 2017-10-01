@@ -14,22 +14,22 @@
     "nuxt": "latest"
   },
   "scripts": {
-    "dev": "nodemon server.js",
-    "build": "nuxt build",
-    "start": "NODE_ENV=production node server.js",
+    "dev": "backpack dev",
+    "build": "nuxt build && backpack build",
+    "start": "NODE_ENV=production node build/main.js",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
+    "backpack-core": "^0.4.2",
     "eslint": "^3.15.0",
     "eslint-config-standard": "^6.2.1",
     "eslint-loader": "^1.6.1",
     "eslint-plugin-html": "^2.0.0",
     "eslint-plugin-promise": "^3.4.1",
     "eslint-plugin-standard": "^2.0.1",
-    "nodemon": "^1.12.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1"
   }
