@@ -31,6 +31,7 @@
 // Curerntly we will not put logic, just bulit layout first
 import UserList from '@/components/UserList'
 import Chat from '@/components/Chat'
+import axios from 'axios'
 
 export default {
   name: 'chat-view',
@@ -44,24 +45,21 @@ export default {
       return this.conversationUserId ? this.users.find(u => u.id === this.conversationUserId) : null
     }
   },
+  asyncData() {
+    return axios.get('/api/users')
+      .then(res => {
+        return {users: res.data}
+      })
+  },
   data() {
     return {
       conversationUserId: null,
-      me: this.$store.state.user,
-      users: [
-        { id: 1, name: 'Joan Pearson', avatar: 'http://lorempixel.com/55/55/people/1/' },
-        { id: 2, name: 'Ruth Kelly', avatar: 'http://lorempixel.com/55/55/people/2/' },
-        { id: 3, name: 'Dennis Bennett', avatar: 'http://lorempixel.com/55/55/people/3/' },
-        { id: 4, name: 'Julia Munoz', avatar: 'http://lorempixel.com/55/55/people/4/' },
-        { id: 5, name: 'David Walker', avatar: 'http://lorempixel.com/55/55/people/5/' },
-        { id: 6, name: 'Aaron Gutierrez', avatar: 'http://lorempixel.com/55/55/people/6/' },
-        { id: 7, name: 'Margaret Pearson', avatar: 'http://lorempixel.com/55/55/people/7/' }
-      ]
+      me: this.$store.state.authUser
     }
   },
   methods: {
-    doLogout({redirect}) {
-      this.$store.dispatch('logout')
+    async doLogout() {
+      await this.$store.dispatch('logout')
 
       this.$router.replace({ path: '/login' })
     }

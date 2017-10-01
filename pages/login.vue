@@ -54,15 +54,6 @@ export default {
       } catch (e) {
 
       }
-    },
-    getData() {
-      return {
-        id: 8,
-        name: this.username, // Use static name for now
-        username: this.username,
-        password: this.password,
-        avatar: 'http://lorempixel.com/55/55/people/8/'
-      }
     }
   }
 }
