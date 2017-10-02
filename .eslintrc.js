@@ -15,4 +15,4 @@ module.exports = {
     "space-before-function-paren": ["error", "never"]
   },
   globals: {}
-}
+};

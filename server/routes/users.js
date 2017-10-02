@@ -1,4 +1,6 @@
 import { Router } from 'express'
+import { userTransformer } from '../helpers'
+import User from '../models/user'
 
 const router = Router()
 
@@ -15,7 +17,14 @@ const users = [
 
 /* GET users listing. */
 router.get('/users', function(req, res, next) {
-  res.json(users)
+  User.find({})
+  .then(users => {
+    res.json(users)
+  })
+  .catch(error => {
+    // Place error handler here
+    res.status(500).send('Something went wrong')
+  })
 })
 
 /* GET user by ID. */

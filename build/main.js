@@ -86,6 +86,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_body_parser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_body_parser__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_express_session__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_express_session___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_express_session__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_mongoose__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_mongoose__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__socketEvents__ = __webpack_require__(9);
+
+
 
 
 
@@ -95,17 +100,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var app = __WEBPACK_IMPORTED_MODULE_0_express___default()();
 var host = process.env.HOST || '127.0.0.1';
 var port = process.env.PORT || 3000;
-var server = __webpack_require__(8).createServer(app);
+var DB_URI = process.env.DB_URL || 'mongodb://localhost/chat-app-dev';
+var server = __webpack_require__(10).createServer(app);
 
-var io = __webpack_require__(9).listen(server);
+var io = __webpack_require__(11).listen(server);
+Object(__WEBPACK_IMPORTED_MODULE_6__socketEvents__["a" /* default */])(io);
 
-io.on('connection', function (socket) {
-  console.log('client conncted');
-
-  socket.on('send-message', function (message) {
-    socket.broadcast.emit('new-message', message);
-  });
-});
+__WEBPACK_IMPORTED_MODULE_5_mongoose___default.a.connect(DB_URI);
 
 app.set('port', port);
 
@@ -122,7 +123,7 @@ app.use(__WEBPACK_IMPORTED_MODULE_4_express_session___default()({
 app.use('/api', __WEBPACK_IMPORTED_MODULE_2__routes__["a" /* default */]);
 
 // Import and Set Nuxt.js options
-var config = __webpack_require__(10);
+var config = __webpack_require__(12);
 config.dev = !("development" === 'production');
 
 // Init Nuxt.js
@@ -177,6 +178,10 @@ router.use(__WEBPACK_IMPORTED_MODULE_2__auth__["a" /* default */]);
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_user__ = __webpack_require__(14);
+
+
 
 
 var router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
@@ -186,7 +191,12 @@ var users = [{ id: 1, name: 'Joan Pearson', username: 'john', avatar: 'http://lo
 
 /* GET users listing. */
 router.get('/users', function (req, res, next) {
-  res.json(users);
+  __WEBPACK_IMPORTED_MODULE_2__models_user__["a" /* default */].find({}).then(function (users) {
+    res.json(users);
+  }).catch(function (error) {
+    // Place error handler here
+    res.status(500).send('Something went wrong');
+  });
 });
 
 /* GET user by ID. */
@@ -208,9 +218,66 @@ router.get('/users/:id', function (req, res, next) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_user__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers__ = __webpack_require__(13);
+
+
 
 
 var router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
+
+// Add POST - /api/register
+router.post('/register', function (req, res, next) {
+  // Check for registration errors
+  var username = req.body.username;
+  var name = req.body.name;
+  var password = req.body.password;
+
+  // Return error if username is not provided
+  if (!username) {
+    return res.status(422).send({ error: 'You must enter an username.' });
+  }
+
+  // Return error if name not provided
+  if (!name) {
+    return res.status(422).send({ error: 'You must enter name.' });
+  }
+
+  // Return error if no password provided
+  if (!password) {
+    return res.status(422).send({ error: 'You must enter a password.' });
+  }
+
+  __WEBPACK_IMPORTED_MODULE_1__models_user__["a" /* default */].findOne({ username: username }, function (err, existingUser) {
+    if (err) {
+      return next(err);
+    }
+
+    // If user is not unique, return error
+    if (existingUser) {
+      return res.status(422).send({ error: 'That username address is already in use.' });
+    }
+
+    // If username is unique and password was provided, create account
+    var user = new __WEBPACK_IMPORTED_MODULE_1__models_user__["a" /* default */]({
+      username: username,
+      password: password,
+      name: name
+    });
+
+    user.save(function (err, user) {
+      if (err) {
+        return next(err);
+      }
+
+      var userInfo = Object(__WEBPACK_IMPORTED_MODULE_2__helpers__["a" /* userTransformer */])(user);
+
+      req.session.authUser = userInfo;
+
+      res.status(201).json(userInfo);
+    });
+  });
+});
 
 // Add POST - /api/login
 router.post('/login', function (req, res) {
@@ -253,16 +320,42 @@ module.exports = require("express-session");
 /* 8 */
 /***/ (function(module, exports) {
 
-module.exports = require("http");
+module.exports = require("mongoose");
 
 /***/ }),
 /* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = (function (io) {
+  // Set socket.io listeners.
+  io.on('connection', function (socket) {
+    console.log('a user connected');
+
+    socket.on('disconnect', function () {
+      console.log('user disconnected');
+    });
+
+    socket.on('send-message', function (message) {
+      socket.broadcast.emit('new-message', message);
+    });
+  });
+});
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+module.exports = require("http");
+
+/***/ }),
+/* 11 */
 /***/ (function(module, exports) {
 
 module.exports = require("socket.io");
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -303,6 +396,100 @@ module.exports = {
     HOST_URL: process.env.HOST_URL || 'http://localhost:3000'
   }
 };
+
+/***/ }),
+/* 13 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return userTransformer; });
+var userTransformer = function userTransformer(request) {
+  return {
+    _id: request._id,
+    firstName: request.name,
+    username: request.username
+  };
+};
+
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bcrypt_nodejs__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bcrypt_nodejs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_bcrypt_nodejs__);
+// Importing Node packages required for schema
+
+
+
+var Schema = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema;
+
+//================================
+// User Schema
+//================================
+var UserSchema = new Schema({
+  username: {
+    type: String,
+    lowercase: true,
+    unique: true,
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  name: {
+    type: String,
+    required: true
+  }
+}, {
+  timestamps: true
+});
+
+//================================
+// User ORM Methods
+//================================
+
+// Pre-save of user to database, hash password if password is modified or new
+UserSchema.pre('save', function (next) {
+  var user = this,
+      SALT_FACTOR = 5;
+
+  if (!user.isModified('password')) return next();
+
+  __WEBPACK_IMPORTED_MODULE_1_bcrypt_nodejs___default.a.genSalt(SALT_FACTOR, function (err, salt) {
+    if (err) return next(err);
+
+    __WEBPACK_IMPORTED_MODULE_1_bcrypt_nodejs___default.a.hash(user.password, salt, null, function (err, hash) {
+      if (err) return next(err);
+      user.password = hash;
+      next();
+    });
+  });
+});
+
+// Method to compare password for login
+UserSchema.methods.comparePassword = function (candidatePassword, cb) {
+  __WEBPACK_IMPORTED_MODULE_1_bcrypt_nodejs___default.a.compare(candidatePassword, this.password, function (err, isMatch) {
+    if (err) {
+      return cb(err);
+    }
+
+    cb(null, isMatch);
+  });
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('User', UserSchema));
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports) {
+
+module.exports = require("bcrypt-nodejs");
 
 /***/ })
 /******/ ]);

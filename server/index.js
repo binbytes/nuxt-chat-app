@@ -3,21 +3,19 @@ import { Nuxt, Builder } from 'nuxt'
 import routes from './routes'
 import bodyParser from 'body-parser'
 import session from 'express-session'
+import mongoose from 'mongoose'
+import socketEvents from './socketEvents'
 
 const app = express()
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
+const DB_URI = process.env.DB_URL || 'mongodb://localhost/chat-app-dev'
 const server = require('http').createServer(app)
 
 const io = require('socket.io').listen(server)
+socketEvents(io)
 
-io.on('connection', (socket) => {
-  console.log('client conncted')
-
-  socket.on('send-message', function(message) {
-    socket.broadcast.emit('new-message', message)
-  })
-})
+mongoose.connect(DB_URI)
 
 app.set('port', port)
 
