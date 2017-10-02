@@ -1,6 +1,5 @@
 import { Router } from 'express'
 import User from '../models/user'
-import { userTransformer } from '../helpers'
 
 const router = Router()
 
@@ -44,11 +43,9 @@ router.post('/register', (req, res, next) => {
     user.save((err, user) => {
       if (err) { return next(err) }
 
-      const userInfo = userTransformer(user)
+      req.session.authUser = user.toJSON()
 
-      req.session.authUser = userInfo
-
-      res.status(201).json(userInfo)
+      res.status(201).json(user)
     })
   })
 })

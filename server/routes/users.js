@@ -1,5 +1,4 @@
 import { Router } from 'express'
-import { userTransformer } from '../helpers'
 import User from '../models/user'
 
 const router = Router()
