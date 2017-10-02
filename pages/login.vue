@@ -30,8 +30,8 @@ export default {
   // Check if user already logged-in
   data() {
     return {
-      username: 'demo7',
-      password: 'demo7',
+      username: null,
+      password: null,
       errors: {}
     }
   },
