@@ -11,16 +11,11 @@
 
       <div class="row">
         <div class="column column-25">
-          <user-list :users="users" :conversationUserId.sync="conversationUserId"></user-list>
+          <user-list :users="users" :recipientUserId.sync="recipientUserId"></user-list>
         </div>
 
         <div class="column coversation-section column-75">
-
-          <chat v-if="conversationUser" :me="me" :conversationUser="conversationUser"></chat>
-
-          <div v-else>
-            <h3 class="info">Please select to start conversation</h3>
-          </div>
+          <chat :me="me" :conversationId="conversationId" :recipientUser="recipientUser"></chat>
         </div>
       </div>
     </div>
@@ -31,6 +26,7 @@
 // Curerntly we will not put logic, just bulit layout first
 import UserList from '@/components/UserList'
 import Chat from '@/components/Chat'
+import Socket from '@/plugins/socket.io'
 
 export default {
   name: 'chat-view',
@@ -40,19 +36,26 @@ export default {
     Chat
   },
   computed: {
-    conversationUser() {
-      return this.conversationUserId ? this.users.find(u => u.id === this.conversationUserId) : null
+    recipientUser() {
+      return this.recipientUserId ? this.users.find(u => u.id === this.recipientUserId) : null
+    }
+  },
+  watch: {
+    recipientUserId() {
+      this.fetchOrConversation()
     }
   },
   async asyncData({ app }) {
-    const users = await app.$axios.$get('/api/users')
+    const users = await app.$axios.$get('users')
+    const { data } = await app.$axios.get('conversations')
 
-    return {users}
+    return { users, conversations: data }
   },
   data() {
     return {
-      conversationUserId: null,
-      me: this.$store.state.authUser
+      recipientUserId: null,
+      conversationId: null,
+      me: this.$store.state.authUser,
     }
   },
   methods: {
@@ -60,6 +63,24 @@ export default {
       await this.$store.dispatch('logout')
 
       this.$router.replace({ path: '/login' })
+    },
+    async fetchOrConversation() {
+      let conversation = this.conversations.find(x => x.participants && x.participants.includes(this.recipientUserId))
+
+      if (!conversation) {
+        //
+        const { conversationId } = await this.$axios.$post(`conversation`, {
+          recipient: this.recipientUserId
+        })
+
+        conversation = {
+          _id: conversationId
+        }
+
+        this.conversations.push(conversation)
+      }
+
+      this.conversationId = conversation._id
     }
   }
 }

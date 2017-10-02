@@ -61,9 +61,9 @@ router.post('/login', (req, res, next) => {
       user.comparePassword(req.body.password, (err, isMatch) => {
         if (isMatch) {
           req.session.authUser = user
-          res.json(user)
+          return res.json(user)
         } else {
-          res.status(500).json({ message: 'Something went wrong' })
+          res.status(401).json({ message: 'Bad credentials' })
         }
       })
     } else {

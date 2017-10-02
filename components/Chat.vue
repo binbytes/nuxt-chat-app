@@ -1,11 +1,11 @@
 <template>
-  <div class="chat">
+  <div class="chat" v-if="recipientUser">
     <div class="chat-header clearfix">
-      <img :src="conversationUser.avatar" alt="avatar" class="user-avatar" />
+      <img :src="recipientUser.avatar" alt="avatar" class="user-avatar" />
 
       <div class="chat-about">
         <div class="chat-with">Chat with
-          <span v-text="conversationUser.name"></span>
+          <span v-text="recipientUser.name"></span>
         </div>
       </div>
       <i class="fa fa-star"></i>
@@ -15,56 +15,81 @@
     <div class="chat-history" v-scroll-bottom>
       <ul>
         <template v-for="message in messages">
-          <chat-message :me="me" :conversationUser="conversationUser" :message="message" :key="message.id"></chat-message>
+          <chat-message :me="me" :recipientUser="recipientUser" :message="message" :key="message.id"></chat-message>
         </template>
       </ul>
     </div>
 
     <chat-new-message v-on:newMessage="pushMessage"></chat-new-message>
   </div>
+  <div v-else>
+    <h3 class="info">Please select to start conversation</h3>
+  </div>
 </template>
 
 <script>
 import ChatNewMessage from './ChatNewMessage'
 import ChatMessage from './ChatMessage'
-import socket from '@/plugins/socket.io'
+import Socket from '@/plugins/socket.io'
 
 export default {
   name: 'chat',
   props: [
-    'me', 'conversationUser'
+    'me', 'recipientUser', 'conversationId'
   ],
   components: {
     ChatNewMessage,
     ChatMessage
   },
-  beforeMount () {
-    socket.on('new-message', (message) => {
+  watch: {
+    conversationId() {
+      this.fetchMessages()
+    }
+  },
+  computed: {
+    endpoint() {
+      return `send-message/${this.conversationId}`
+    }
+  },
+  beforeMount() {
+    Socket.on('new-message', (message) => {
       console.log('got new message', message)
       this.messages.push(message)
     })
   },
   data() {
     return {
-      messages: [
-        { id: 111, text: 'Hi, how are you? How is the project coming along?', 'sender': 1, datetime: '10:12 AM' },
-        { id: 112, text: 'Are we meeting today? Project has been already finished and I have results to show you.', 'sender': 8, datetime: '10:14 AM' },
-        { id: 113, text: 'Well I am not sure. The rest of the team is not here yet. Maybe in an hour or so? Have you faced any problems at the last phase of the project?', 'sender': 1, datetime: '10:15 AM' },
-        { id: 114, text: 'Actually everything was fine. I\'m very excited to show this to our team.', 'sender': 8, datetime: '10:16 AM' }
-      ]
+      messages: []
     }
   },
+  mount() {
+    console.log('mount')
+    this.fetchMessages()
+  },
   methods: {
+    async fetchMessages() {
+      // get conversation messages
+      const {data} = await this.$axios.get(`conversation\\${this.conversationId}`)
+
+      this.messages = data
+    },
     pushMessage(message) {
-      const date = new Date()
-      const newMessage = {
-        id: 123,
-        text: message,
-        sender: this.me.id,
-        datetime: date.getHours() + ':' + date.getMinutes()
-      }
-      this.messages.push(newMessage)
-      socket.emit('send-message', newMessage)
+      this.$axios.post(this.endpoint, {
+          body: message
+        })
+        .then((res) => {
+          this.messages.push(res.data)
+          Socket.emit('send-message', res.data)
+        })
+      // const date = new Date()
+      // const newMessage = {
+      //   id: 123,
+      //   text: message,
+      //   sender: this.me.id,
+      //   datetime: date.getHours() + ':' + date.getMinutes()
+      // }
+      // this.messages.push(newMessage)
+      // Socket.emit('send-message', newMessage)
     }
   },
   directives: {

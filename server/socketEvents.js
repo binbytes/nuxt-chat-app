@@ -1,10 +1,10 @@
 export default function(io) {
   // Set socket.io listeners.
   io.on('connection', (socket) => {
-    console.log('a user connected')
+    console.log('a socket client connected')
 
     socket.on('disconnect', () => {
-      console.log('user disconnected')
+      console.log('socket client disconnected')
     })
 
     socket.on('send-message', function(message) {
