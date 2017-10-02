@@ -54,20 +54,25 @@ router.post('/register', (req, res, next) => {
 })
 
 // Add POST - /api/login
-router.post('/login', (req, res) => {
-  if (req.body.username === 'demo' && req.body.password === 'demo') {
-    // Use static name for now
-    const authUser = {
-      id: 8,
-      name: req.body.username,
-      username: req.body.username,
-      avatar: 'http://lorempixel.com/55/55/people/8/'
-    }
+router.post('/login', (req, res, next) => {
 
-    req.session.authUser = authUser
-    return res.json(authUser)
-  }
-  res.status(401).json({ message: 'Bad credentials' })
+  User.findOne({ username: req.body.username }, (err, user) => {
+    if (err) { return next(err) }
+
+    // If user found unique set session and return user data
+    if (user) {
+      user.comparePassword(req.body.password, (err, isMatch) => {
+        if (isMatch) {
+          req.session.authUser = user
+          res.json(user)
+        } else {
+          res.status(500).json({ message: 'Something went wrong' })
+        }
+      })
+    } else {
+      res.status(401).json({ message: 'Bad credentials' })
+    }
+  })
 })
 
 // Add POST - /api/logout
