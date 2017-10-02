@@ -4,6 +4,9 @@ node_modules
 # logs
 *.log
 
+# server build
+build
+
 # Nuxt build
 .nuxt
 
