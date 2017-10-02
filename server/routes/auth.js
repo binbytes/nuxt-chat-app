@@ -26,19 +26,19 @@ router.post('/register', (req, res, next) => {
     return res.status(422).send({ error: 'You must enter a password.' })
   }
 
-  User.findOne({ username }, (err, existingUser) => {
+  User.findOne({ username: username }, (err, existingUser) => {
     if (err) { return next(err) }
 
-      // If user is not unique, return error
+    // If user is not unique, return error
     if (existingUser) {
-      return res.status(422).send({ error: 'That username address is already in use.' })
+      return res.status(422).send({ error: 'That username is already in use.' })
     }
 
-      // If username is unique and password was provided, create account
+    // If username is unique and password was provided, create account
     const user = new User({
       username,
       password,
-      name: name
+      name
     })
 
     user.save((err, user) => {

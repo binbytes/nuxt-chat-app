@@ -9,7 +9,7 @@ import socketEvents from './socketEvents'
 const app = express()
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
-const DB_URI = process.env.DB_URL || 'mongodb://localhost/chat-app-dev'
+const DB_URI = process.env.DB_URL || 'mongodb://localhost/nuxt-chat-app'
 const server = require('http').createServer(app)
 
 const io = require('socket.io').listen(server)
