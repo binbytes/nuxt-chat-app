@@ -1,5 +1,11 @@
 module.exports = {
   /*
+  ** Build
+  */
+  build: {
+    vendor: ['socket.io-client']
+  },
+  /*
   ** Headers
   ** Common headers are already provided by @nuxtjs/pwa preset
   */
@@ -34,7 +40,7 @@ module.exports = {
   ** Plugins
   */
   plugins: [
-    '~plugins/socket.io'
+    //
   ],
   /*
   ** Axios settings
