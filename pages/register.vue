@@ -60,8 +60,8 @@ export default {
       }
 
       try {
-        const user = await this.$axios.post('api/register', this.$data)
-        await this.$store.commit('SET_USER', user)
+        const {data} = await this.$axios.post('api/register', this.$data)
+        await this.$store.commit('SET_USER', data)
 
         this.$router.replace({ path: '/' })
       } catch (e) {
