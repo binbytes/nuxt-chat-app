@@ -17,7 +17,7 @@ const users = [
 
 /* GET users listing. */
 router.get('/users', function(req, res, next) {
-  User.find({})
+  User.find({ _id: { $ne: req.session.authUser.id } })
   .then(users => {
     res.json(users)
   })
