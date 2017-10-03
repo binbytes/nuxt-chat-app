@@ -46,9 +46,9 @@ module.exports = {
   ** Axios settings
   */
   axios: {
-    baseURL: process.env.HOST_URL || `http://${process.env.HOST || 'localhost'}:${process.env.HOST_URL || 3000}/api/`
+    baseURL: process.env.HOST_URL || `http://${process.env.HOST || 'localhost'}:${process.env.HOST_URL || 3002}/api/`
   },
   env: {
-    HOST_URL: process.env.HOST_URL || 'http://localhost:3000'
+    HOST_URL: process.env.HOST_URL || 'http://localhost:3002'
   }
 }

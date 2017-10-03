@@ -71,14 +71,14 @@ export default {
   methods: {
     async fetchMessages() {
       // get conversation messages
-      const {data} = await this.$axios.get(`conversation\\${this.conversationId}`)
+      const { data } = await this.$axios.get(`conversation\\${this.conversationId}`)
 
       this.messages = data
     },
     pushMessage(message) {
       this.$axios.post(this.endpoint, {
-          body: message
-        })
+        body: message
+      })
         .then((res) => {
           this.messages.push(res.data)
           Socket.emit('send-message', res.data)
