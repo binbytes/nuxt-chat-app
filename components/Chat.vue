@@ -43,6 +43,9 @@ export default {
   },
   watch: {
     conversationId() {
+
+      Socket.emit('enter-conversation', this.conversationId)
+
       this.fetchMessages()
     }
   },
@@ -63,7 +66,6 @@ export default {
     }
   },
   mount() {
-    console.log('mount')
     this.fetchMessages()
   },
   methods: {
@@ -81,15 +83,6 @@ export default {
           this.messages.push(res.data)
           Socket.emit('send-message', res.data)
         })
-      // const date = new Date()
-      // const newMessage = {
-      //   id: 123,
-      //   text: message,
-      //   sender: this.me.id,
-      //   datetime: date.getHours() + ':' + date.getMinutes()
-      // }
-      // this.messages.push(newMessage)
-      // Socket.emit('send-message', newMessage)
     }
   },
   directives: {

@@ -7,8 +7,16 @@ export default function(io) {
       console.log('socket client disconnected')
     })
 
+    socket.on('enter-conversation', (conversation) => {
+      socket.join(conversation)
+    })
+
+    socket.on('leave-conversation', (conversation) => {
+      socket.leave(conversation)
+    })
+
     socket.on('send-message', function(message) {
-      socket.broadcast.emit('new-message', message)
+      io.sockets.in(message.conversationId).emit('new-message', message)
     })
   })
 }

@@ -16,14 +16,13 @@ const io = require('socket.io').listen(server)
 socketEvents(io)
 
 mongoose.connect(DB_URI)
-const MongoStore = require('connect-mongo')(session)
+// const MongoStore = require('connect-mongo')(session)
 
 app.set('port', port)
 
 app.use(bodyParser.json())
 
 app.use(session({
-  store: new MongoStore({ mongooseConnection: mongoose.connection }),
   secret: process.env.secretKey || '7CigmgctzNfojD5D3eJ7tY62axBuFICn',
   resave: false,
   saveUninitialized: false,
