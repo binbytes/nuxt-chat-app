@@ -40,7 +40,7 @@ router.post('/conversation', function(req, res, next) {
     return next()
   }
 
-  Conversation.find({ participants: [req.session.authUser.id, req.body.recipient] }, (err, existingConversation) => {
+  Conversation.findOne({ participants: [req.session.authUser.id, req.body.recipient] }, (err, existingConversation) => {
     if (existingConversation) {
       return res.status(200).json({conversationId: existingConversation._id})
     }
