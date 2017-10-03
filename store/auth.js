@@ -45,9 +45,6 @@ export const actions = {
       } else {
         Cookies.remove('token')
       }
-    } else {
-      // ...Server
-      // TODO: Use set-cookie header for this.$ctx.res
     }
   },
 
