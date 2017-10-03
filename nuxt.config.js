@@ -40,13 +40,19 @@ module.exports = {
   ** Plugins
   */
   plugins: [
-    //
+    '~/plugins/auth.js'
   ],
   /*
   ** Axios settings
   */
   axios: {
-    baseURL: process.env.HOST_URL || `http://${process.env.HOST || 'localhost'}:${process.env.HOST_URL || 3002}/api/`
+    baseURL: process.env.HOST_URL || `http://${process.env.HOST || 'localhost'}:${process.env.HOST_URL || 3002}/api/`,
+    requestInterceptor: (config, { store }) => {
+      if (store.state.auth.token) {
+        config.headers.common['Authorization'] = store.state.auth.token
+      }
+      return config
+    }
   },
   env: {
     HOST_URL: process.env.HOST_URL || 'http://localhost:3002'

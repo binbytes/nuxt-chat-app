@@ -55,7 +55,7 @@ export default {
     return {
       recipientUserId: null,
       conversationId: null,
-      me: this.$store.state.authUser,
+      me: this.$store.state.auth.user,
     }
   },
   methods: {

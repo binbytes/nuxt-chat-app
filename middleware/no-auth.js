@@ -1,5 +1,5 @@
-export default function({ store, redirect }) {
-  if (store.getters['loggedIn']) {
+export default function ({ store, redirect }) {
+  if (store.getters['auth/loggedIn']) {
     return redirect('/')
   }
 }

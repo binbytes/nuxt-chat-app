@@ -30,8 +30,8 @@ export default {
   // Check if user already logged-in
   data() {
     return {
-      username: null,
-      password: null,
+      username: 'demo6',
+      password: 'demo6',
       errors: {}
     }
   },
@@ -53,7 +53,7 @@ export default {
       }
 
       try {
-        await this.$store.dispatch('login', this.$data)
+        await this.$store.dispatch('auth/login', this.$data)
         this.$router.replace({ path: '/' })
       } catch (e) {
 
