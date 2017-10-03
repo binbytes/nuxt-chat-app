@@ -16,7 +16,7 @@ export default function(io) {
     })
 
     socket.on('send-message', function(message) {
-      io.sockets.in(message.conversationId).emit('new-message', message)
+      socket.broadcast.to(message.conversationId).emit('new-message', message)
     })
   })
 }
