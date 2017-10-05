@@ -61,6 +61,10 @@ export default {
         if (response.status === 422) {
           this.errors = response.data
         }
+
+        if (response.status === 401) {
+          this.errors['error'] = response.data.message
+        }
       }
     }
   }
