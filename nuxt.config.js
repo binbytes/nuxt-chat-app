@@ -33,20 +33,21 @@ module.exports = {
   ** Modules
   */
   modules: [
-    '@nuxtjs/pwa',
+    ['@nuxtjs/pwa', { workbox: false }],
     '@nuxtjs/axios'
   ],
   /*
   ** Plugins
   */
   plugins: [
-    '~/plugins/auth.js'
+    '~/plugins/auth.js',
+    '~/plugins/socket.io.js'
   ],
   /*
   ** Axios settings
   */
   axios: {
-    baseURL: process.env.HOST_URL || `http://${process.env.HOST || 'localhost'}:${process.env.HOST_URL || 3002}/api/`,
+    baseURL: process.env.HOST_URL || `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3002}/api/`,
     requestInterceptor: (config, { store }) => {
       if (store.state.auth.token) {
         config.headers.common['Authorization'] = store.state.auth.token
@@ -55,6 +56,6 @@ module.exports = {
     }
   },
   env: {
-    HOST_URL: process.env.HOST_URL || 'http://localhost:3002'
+    HOST_URL: process.env.HOST_URL || `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3002}`
   }
 }

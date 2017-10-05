@@ -1,11 +1,11 @@
 <template>
-  <div class="chat" v-if="recipientUser">
+  <div class="chat" v-if="recipient">
     <div class="chat-header clearfix">
-      <img :src="recipientUser.avatar" alt="avatar" class="user-avatar" />
+      <img :src="recipient.avatar" alt="avatar" class="user-avatar" />
 
       <div class="chat-about">
         <div class="chat-with">Chat with
-          <span v-text="recipientUser.name"></span>
+          <span v-text="recipient.name"></span>
         </div>
       </div>
       <i class="fa fa-star"></i>
@@ -15,7 +15,7 @@
     <div class="chat-history" v-scroll-bottom>
       <ul>
         <template v-for="message in messages">
-          <chat-message :me="me" :recipientUser="recipientUser" :message="message" :key="message.id"></chat-message>
+          <chat-message :me="me" :recipientUser="recipient" :message="message" :key="message.id"></chat-message>
         </template>
       </ul>
     </div>
@@ -30,59 +30,32 @@
 <script>
 import ChatNewMessage from './ChatNewMessage'
 import ChatMessage from './ChatMessage'
-import Socket from '@/plugins/socket.io'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'chat',
-  props: [
-    'me', 'recipientUser', 'conversationId'
-  ],
   components: {
     ChatNewMessage,
     ChatMessage
   },
-  watch: {
-    conversationId() {
-
-      Socket.emit('enter-conversation', this.conversationId)
-
-      this.fetchMessages()
-    }
-  },
   computed: {
-    endpoint() {
-      return `send-message/${this.conversationId}`
+    ...mapGetters({
+      conversation: 'currentConversation',
+      recipient: 'recipientUser'
+    }),
+    conversationId() {
+      return this.conversation ? this.conversation._id : null
+    },
+    messages() {
+      return this.conversation ? this.conversation.messages : []
+    },
+    me() {
+      return this.$store.state.auth.user
     }
-  },
-  beforeMount() {
-    Socket.on('new-message', (message) => {
-      console.log('got new message', message)
-      this.messages.push(message)
-    })
-  },
-  data() {
-    return {
-      messages: []
-    }
-  },
-  mount() {
-    this.fetchMessages()
   },
   methods: {
-    async fetchMessages() {
-      // get conversation messages
-      const { data } = await this.$axios.get(`conversation\\${this.conversationId}`)
-
-      this.messages = data
-    },
     pushMessage(message) {
-      this.$axios.post(this.endpoint, {
-        body: message
-      })
-        .then((res) => {
-          this.messages.push(res.data)
-          Socket.emit('send-message', res.data)
-        })
+      this.$store.dispatch('sendMessage', message)
     }
   },
   directives: {

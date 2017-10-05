@@ -11,49 +11,36 @@
     debug "^3.1.0"
     whatwg-url "^6.3.0"
 
-"@nuxtjs/cssnano@latest":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/cssnano/-/cssnano-1.0.1.tgz#f84019b903ca291cfae8636fb427acb0d9467c83"
-  dependencies:
-    cssnano "^3.10.0"
-
-"@nuxtjs/icon@latest":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/icon/-/icon-1.1.0.tgz#3bd08c75fe31c82121c5d5e8c13ef4704a83b5a2"
+"@nuxtjs/icon@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/icon/-/icon-1.1.2.tgz#a70d05515f2ce7808db8ccf2e6dc0432523abe3f"
   dependencies:
     fs-extra "^3.0.1"
     hash-sum "^1.0.2"
     jimp "^0.2.28"
 
-"@nuxtjs/manifest@latest":
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/manifest/-/manifest-1.7.0.tgz#cea947a2f3c3422f1add93601085ec27fd0149a6"
+"@nuxtjs/manifest@^1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/manifest/-/manifest-1.7.2.tgz#e78e3133af61bed0578bbb31f87fd1350c54bc0a"
   dependencies:
     hash-sum "^1.0.2"
 
-"@nuxtjs/meta@latest":
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/meta/-/meta-1.5.1.tgz#9c689e6c9b17747aefabdb4b199c509c296850e3"
-
-"@nuxtjs/optimize@latest":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/optimize/-/optimize-1.1.1.tgz#70188c99407aa3be717ec44108ce3a4fc92aff34"
-  dependencies:
-    "@nuxtjs/cssnano" latest
+"@nuxtjs/meta@^1.5.3":
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/meta/-/meta-1.5.3.tgz#9aa892d49de718ebf3f53198cb3b23b79ad0454a"
 
 "@nuxtjs/pwa@latest":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/pwa/-/pwa-0.2.1.tgz#fed43591b281082449ce59e6707900df38000a4c"
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/pwa/-/pwa-1.0.2.tgz#220bc3f33a2a19637fb66696d3842fc326390b29"
   dependencies:
-    "@nuxtjs/icon" latest
-    "@nuxtjs/manifest" latest
-    "@nuxtjs/meta" latest
-    "@nuxtjs/optimize" latest
-    "@nuxtjs/workbox" latest
+    "@nuxtjs/icon" "^1.1.2"
+    "@nuxtjs/manifest" "^1.7.2"
+    "@nuxtjs/meta" "^1.5.3"
+    "@nuxtjs/workbox" "^1.2.2"
 
-"@nuxtjs/workbox@latest":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/workbox/-/workbox-1.2.0.tgz#3db3a79b2e6e17c8659c45b81f4b0f366f82e9b4"
+"@nuxtjs/workbox@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/workbox/-/workbox-1.2.2.tgz#69e4467d4d8bfb3719ff56b24c1ee901b793efc7"
   dependencies:
     workbox-build "^1.3.0"
 
@@ -955,8 +942,8 @@ block-stream@*:
     inherits "~2.0.0"
 
 bluebird@^3.1.1, bluebird@^3.4.7:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.0.tgz#791420d7f551eea2897453a8a77653f96606d67c"
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.1.tgz#d9551f9de98f1fcda1e683d17ee91a0602ee2eb9"
 
 bmp-js@0.0.3:
   version "0.0.3"
@@ -1164,12 +1151,12 @@ caniuse-api@^2.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
-  version "1.0.30000740"
-  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000740.tgz#03fcaaa176e3ed075895f72d46c1a12149bbeac9"
+  version "1.0.30000744"
+  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000744.tgz#00758ff7dd5f7138d34a15608dccf71a59656ffe"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000718, caniuse-lite@^1.0.30000726:
-  version "1.0.30000740"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000740.tgz#f2c4c04d6564eb812e61006841700ad557f6f973"
+  version "1.0.30000743"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000743.tgz#f4f5c6750676ff8f6144ea40456c3729d5341769"
 
 caseless@~0.12.0:
   version "0.12.0"
@@ -1594,7 +1581,7 @@ cssesc@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/cssesc/-/cssesc-0.1.0.tgz#c814903e45623371a0477b40109aaafbeeaddbb4"
 
-"cssnano@>=2.6.1 <4", cssnano@^3.10.0:
+"cssnano@>=2.6.1 <4":
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/cssnano/-/cssnano-3.10.0.tgz#4f38f6cea2b9b17fa01490f23f1dc68ea65c1c38"
   dependencies:
@@ -2216,8 +2203,8 @@ extglob@^0.3.1:
     is-extglob "^1.0.0"
 
 extract-text-webpack-plugin@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/extract-text-webpack-plugin/-/extract-text-webpack-plugin-3.0.0.tgz#90caa7907bc449f335005e3ac7532b41b00de612"
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/extract-text-webpack-plugin/-/extract-text-webpack-plugin-3.0.1.tgz#605a8893faca1dd49bb0d2ca87493f33fd43d102"
   dependencies:
     async "^2.4.1"
     loader-utils "^1.1.0"
@@ -4535,8 +4522,8 @@ postcss-zindex@^2.0.1:
     uniqs "^2.0.0"
 
 postcss@^5.0.10, postcss@^5.0.11, postcss@^5.0.12, postcss@^5.0.13, postcss@^5.0.14, postcss@^5.0.16, postcss@^5.0.2, postcss@^5.0.4, postcss@^5.0.5, postcss@^5.0.6, postcss@^5.0.8, postcss@^5.2.16:
-  version "5.2.17"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-5.2.17.tgz#cf4f597b864d65c8a492b2eabe9d706c879c388b"
+  version "5.2.18"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-5.2.18.tgz#badfa1497d46244f6390f58b319830d9107853c5"
   dependencies:
     chalk "^1.1.3"
     js-base64 "^2.1.9"
@@ -4544,11 +4531,11 @@ postcss@^5.0.10, postcss@^5.0.11, postcss@^5.0.12, postcss@^5.0.13, postcss@^5.0
     supports-color "^3.2.3"
 
 postcss@^6.0.0, postcss@^6.0.1, postcss@^6.0.10, postcss@^6.0.11, postcss@^6.0.2, postcss@^6.0.3, postcss@^6.0.5, postcss@^6.0.6:
-  version "6.0.12"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-6.0.12.tgz#6b0155089d2d212f7bd6a0cecd4c58c007403535"
+  version "6.0.13"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-6.0.13.tgz#b9ecab4ee00c89db3ec931145bd9590bbf3f125f"
   dependencies:
     chalk "^2.1.0"
-    source-map "^0.5.7"
+    source-map "^0.6.1"
     supports-color "^4.4.0"
 
 prelude-ls@~1.1.2:
@@ -4564,8 +4551,8 @@ preserve@^0.2.0:
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
 prettier@^1.7.0:
-  version "1.7.3"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.7.3.tgz#8e6974725273914b1c47439959dd3d3ba53664b6"
+  version "1.7.4"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.7.4.tgz#5e8624ae9363c80f95ec644584ecdf55d74f93fa"
 
 pretty-error@^2.0.2, pretty-error@^2.1.1:
   version "2.1.1"
@@ -5212,6 +5199,10 @@ source-map@0.5.x, source-map@^0.5.3, source-map@^0.5.6, source-map@^0.5.7, sourc
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
 
+source-map@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
+
 spdx-correct@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/spdx-correct/-/spdx-correct-1.0.2.tgz#4b3073d933ff51f3912f03ac5519498a4150db40"
@@ -5481,8 +5472,8 @@ to-fast-properties@^1.0.3:
   resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-1.0.3.tgz#b83571fa4d8c25b82e231b06e3a3055de4ca1a47"
 
 toposort@^1.0.0:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/toposort/-/toposort-1.0.4.tgz#a86107690cbee8cae43b349d2f60162500924dfc"
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/toposort/-/toposort-1.0.6.tgz#c31748e55d210effc00fdcdc7d6e68d7d7bb9cec"
 
 tough-cookie@~2.3.0, tough-cookie@~2.3.3:
   version "2.3.3"
@@ -5694,8 +5685,8 @@ vm-browserify@0.0.4:
     indexof "0.0.1"
 
 vue-hot-reload-api@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.1.0.tgz#9ca58a6e0df9078554ce1708688b6578754d86de"
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.1.1.tgz#1ba6712166182fd651753804b9d8d8d02d855579"
 
 vue-loader@^13.0.4:
   version "13.0.5"

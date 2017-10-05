@@ -27,7 +27,6 @@
 export default {
   name: 'login',
   middleware: 'no-auth',
-  // Check if user already logged-in
   data() {
     return {
       username: 'demo6',

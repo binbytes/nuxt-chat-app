@@ -6,7 +6,7 @@
     </div>
 
     <ul class="list">
-      <li :class="['clearfix', recipientUserId === user.id ? 'active' : '']" v-for="user in users" :key="user.id" @click="selectUserForConversation(user.id)">
+      <li :class="['clearfix', recipientUserID === user.id ? 'active' : '']" v-for="user in users" :key="user.id" @click="selectUserForConversation(user.id)">
         <img :src="user.avatar" alt="avatar" />
         <div class="about">
           <div class="name" v-text="user.name"></div>
@@ -23,12 +23,17 @@
 <script>
 export default {
   name: 'user-list',
-  props: [
-    'users', 'recipientUserId'
-  ],
+  computed: {
+    users() {
+      return this.$store.state.users
+    },
+    recipientUserID() {
+      return this.$store.state.recipientUserID
+    }
+  },
   methods: {
-    selectUserForConversation(userId) {
-      this.$emit('update:recipientUserId', userId)
+    selectUserForConversation(recipientUserID) {
+      this.$store.dispatch('switchConversation', recipientUserID)
     }
   }
 }
