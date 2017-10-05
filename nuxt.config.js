@@ -47,7 +47,7 @@ module.exports = {
   ** Axios settings
   */
   axios: {
-    baseURL: process.env.HOST_URL || `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3002}/api/`,
+    baseURL: process.env.API_BASE_URL || `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3000}/api/`,
     requestInterceptor: (config, { store }) => {
       if (store.state.auth.token) {
         config.headers.common['Authorization'] = store.state.auth.token
@@ -56,6 +56,6 @@ module.exports = {
     }
   },
   env: {
-    HOST_URL: process.env.HOST_URL || `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3002}`
+    HOST_URL: process.env.SOCKET_HOST_URL || `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3000}`
   }
 }
