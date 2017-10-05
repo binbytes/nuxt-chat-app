@@ -16,7 +16,7 @@
             <input class="button-primary" type="submit" value="Login">
 
             <div>
-              <router-link to="register">Dont have account, create account from here</router-link>
+              <router-link to="/register">Dont have account, create account from here</router-link>
             </div>
           </fieldset>
         </form>

@@ -20,7 +20,7 @@
             <input class="button-primary" type="submit" value="Register">
 
             <div>
-              <router-link to="register">Already have account, login from here</router-link>
+              <router-link to="/login">Already have account, login from here</router-link>
             </div>
           </fieldset>
         </form>
