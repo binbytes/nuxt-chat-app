@@ -5,6 +5,8 @@
         <form v-on:submit.prevent="onSubmit">
           <h3>Login</h3>
           <fieldset>
+            <div class="error-box" v-text="errors.error" v-if="errors.error"></div>
+
             <label for="Username">Username</label>
             <input type="text" :class="[errors.username ? 'has-error' : null]" placeholder="Username" v-model="username">
 
@@ -54,8 +56,11 @@ export default {
       try {
         await this.$store.dispatch('auth/login', this.$data)
         this.$router.replace({ path: '/' })
-      } catch (e) {
+      } catch ({ response }) {
 
+        if (response.status === 422) {
+          this.errors = response.data
+        }
       }
     }
   }
