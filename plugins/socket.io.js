@@ -1,5 +1,5 @@
 import io from 'socket.io-client'
-const socket = io(process.env.HOST_URL)
+const socket = io(process.env.SOCKET_URL)
 
 export default ({ store, app }, inject) => {
   inject('socket', socket)
