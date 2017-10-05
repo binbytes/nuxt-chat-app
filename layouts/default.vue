@@ -30,4 +30,12 @@ body {
 .auth-page input.has-error {
   border-color: red;
 }
+
+.auth-page .error-box {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  padding: 15px;
+  margin-bottom: 15px;
+}
 </style>

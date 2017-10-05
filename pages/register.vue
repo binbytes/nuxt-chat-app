@@ -5,6 +5,9 @@
         <form v-on:submit.prevent="onSubmit">
           <h3>Register</h3>
           <fieldset>
+            <div class="error-box" v-text="errors.error" v-if="errors.error">
+            </div>
+
             <label for="name">Name</label>
             <input type="text" :class="[errors.name ? 'has-error' : null]" placeholder="Name" v-model="name">
 
@@ -32,8 +35,8 @@ export default {
   middleware: 'no-auth',
   data() {
     return {
-      name: null,
-      username: null,
+      name: 'demo6',
+      username: 'demo6',
       password: null,
       errors: {}
     }
@@ -60,12 +63,14 @@ export default {
       }
 
       try {
-        const {data} = await this.$axios.post('register', this.$data)
-        await this.$store.commit('SET_USER', data)
+        const { data } = await this.$axios.post('/auth/register', this.$data)
 
-        this.$router.replace({ path: '/' })
-      } catch (e) {
-        // handle error
+        this.$router.replace({ path: '/', query: 'loggedIn' })
+      } catch ({ response }) {
+
+        if (response.status === 422) {
+          this.errors = response.data
+        }
       }
     }
   }
