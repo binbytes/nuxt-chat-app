@@ -56,6 +56,6 @@ module.exports = {
     }
   },
   env: {
-    HOST_URL: process.env.SOCKET_HOST_URL || `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3002}`
+    SOCKET_HOST_URL: process.env.SOCKET_HOST_URL || `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3002}`
   }
 }
