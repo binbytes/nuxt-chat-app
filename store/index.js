@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import socket from '~/plugins/socket.io'
 
 export const state = () => ({
   users: {},
@@ -30,7 +31,9 @@ export const mutations = {
   },
   SET_ONLINE_USERS: function (state, ids) {
     ids.forEach(id => {
-      Vue.set(state.users[id], 'online', true)
+      if (id && state.users[id]) {
+        Vue.set(state.users[id], 'online', true)
+      }
     })
   },
   SET_USER_OFFLINE: function (state, id) {
@@ -40,11 +43,11 @@ export const mutations = {
     if (!conversations) return
 
     conversations.forEach(conversation => {
-      createConversation(state, conversation, this.$socket)
+      createConversation(state, conversation)
     })
   },
   ADD_CONVERSATION: function (state, conversation) {
-    createConversation(state, conversation, this.$socket)
+    createConversation(state, conversation)
   },
   SWITCH_CONVERSATION: function (state, id) {
     state.currentConversationId = id
@@ -125,7 +128,7 @@ export const actions = {
 
     if (data) {
       await dispatch('pushMessage', data)
-      this.$socket.emit('send-message', data)
+      socket.emit('send-message', data)
     }
   },
 
@@ -142,7 +145,7 @@ export const actions = {
   }
 }
 
-const createConversation = (state, conversation, socket) => {
+const createConversation = (state, conversation) => {
   conversation.messages = []
   conversation.isRead = true
   conversation.fetched = false

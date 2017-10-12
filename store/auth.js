@@ -1,5 +1,6 @@
 import Cookie from 'cookie'
 import Cookies from 'js-cookie'
+import socket from '~/plugins/socket.io.js'
 
 export const state = () => ({
   token: null,
@@ -29,7 +30,7 @@ export const actions = {
     commit('SET_TOKEN', token)
 
     // Update localStorage
-    if (process.browser && localStorage) {
+    if (localStorage) {
       if (token) {
         localStorage.setItem('nuxt::auth::token', token)
       } else {
@@ -52,7 +53,7 @@ export const actions = {
     let token
 
     // First try localStorage
-    if (process.browser && localStorage) {
+    if (localStorage) {
       token = localStorage.getItem('nuxt::auth::token')
     }
 
@@ -75,6 +76,7 @@ export const actions = {
 
   async fetch ({ state, commit, dispatch }, { endpoint = '/me' } = {}) {
     // Fetch and update latest token
+
     await dispatch('fetchToken')
 
     // Not loggedIn
@@ -87,7 +89,7 @@ export const actions = {
       const userData = await this.$axios.$get(endpoint)
       commit('SET_USER', userData)
 
-      this.$socket.emit('online-ping', userData.id)
+      socket.emit('online-ping', userData.id)
     } catch (e) {
       return dispatch('invalidate')
     }

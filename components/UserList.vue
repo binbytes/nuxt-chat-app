@@ -36,71 +36,69 @@ export default {
     selectUserForConversation(recipientUserID) {
       this.$store.dispatch('switchConversation', recipientUserID)
     }
-  },
-  mounted() {
-    this.$socket.on('user-online', (id) => {
-      this.$store.dispatch('setOnline', id)
-    })
-
-    this.$socket.on('user-offline', (id) => {
-      this.$store.dispatch('setOffline', id)
-    })
-
-    this.$socket.on('welcome', (ids) => {
-      console.log('welcome')
-      // this.$store.dispatch('setOnlineUsers', ids)
-    })
   }
 }
 </script>
 
 <style lang="stylus" scoped>
-$chat-panel-bg = #444753
-$active-bg-color = rgba(162, 162, 162, 0.26)
-$status-text-color = #92959E
+$chat-panel-bg = #444753;
+$active-bg-color = rgba(162, 162, 162, 0.26);
+$status-text-color = #92959E;
 
-.people-list
-  background $chat-panel-bg
-  width 260px
-  float left
+.people-list {
+  background: $chat-panel-bg;
+  width: 260px;
+  float: left;
 
-  .search
-    padding 20px
-    input
-      width 90%
+  .search {
+    padding: 20px;
 
-  .fa-search
-    position relative
-    left -25px
-    color #ffffff
+    input {
+      width: 90%;
+    }
+  }
 
-  ul
-    height 770px
-    overflow-y auto
+  .fa-search {
+    position: relative;
+    left: -25px;
+    color: #ffffff;
+  }
 
-    li
-      padding-bottom 20px
-      padding 10px
-      cursor pointer
-      &.active
-        background $active-bg-color
+  ul {
+    height: 770px;
+    overflow-y: auto;
 
-  img
-    float left
-    border-radius 50%
+    li {
+      padding-bottom: 20px;
+      padding: 10px;
+      cursor: pointer;
 
-  .about
-    float left
-    margin-top 8px
-    padding-left 8px
+      &.active {
+        background: $active-bg-color;
+      }
+    }
+  }
 
-  .name
+  img {
+    float: left;
+    border-radius: 50%;
+  }
+
+  .about {
+    float: left;
+    margin-top: 8px;
+    padding-left: 8px;
+  }
+
+  .name {
     color: white;
+  }
 
-  .status
-    color $status-text-color
+  .status {
+    color: $status-text-color;
+  }
 
-  input
+  input {
     border-radius: 3px;
     border: none;
     padding: 14px;
@@ -108,4 +106,6 @@ $status-text-color = #92959E
     background: #6A6C75;
     width: 90%;
     font-size: 14px;
+  }
+}
 </style>

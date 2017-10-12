@@ -1,10 +1,17 @@
 import io from 'socket.io-client'
 
-export default ({ store, app, env }, inject) => {
-  const socket = io(process.env.SOCKET_HOST_URL)
-  inject('socket', socket)
+const socket = io(process.env.SOCKET_HOST_URL)
 
-  socket.on('new-message', (message) => {
-    store.dispatch('pushMessage', message)
-  })
-}
+// socket.on('new-message', (message) => {
+//   store.dispatch('pushMessage', message)
+// })
+
+// socket.on('online-users', (ids) => {
+//   if (ids) {
+//     setTimeout(() => {
+//       store.dispatch('setOnlineUsers', ids)
+//     }, 1000)
+//   }
+// })
+
+export default socket

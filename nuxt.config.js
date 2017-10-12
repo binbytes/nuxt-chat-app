@@ -1,4 +1,5 @@
 module.exports = {
+  mode: 'spa',
   /*
   ** Build
   */
@@ -40,8 +41,8 @@ module.exports = {
   ** Plugins
   */
   plugins: [
-    '~/plugins/auth.js',
-    '~/plugins/socket.io.js'
+    '~/plugins/auth.js'
+    // '~/plugins/socket.io.js'
   ],
   /*
   ** Axios settings

@@ -26,7 +26,7 @@
 // Curerntly we will not put logic, just bulit layout first
 import UserList from '@/components/UserList'
 import Chat from '@/components/Chat'
-import Socket from '@/plugins/socket.io'
+import socket from '~/plugins/socket.io.js'
 
 export default {
   name: 'chat-view',
@@ -37,6 +37,28 @@ export default {
   },
   beforeMount() {
     this.$store.dispatch('actionAfterLoggedin')
+
+    socket.on('online-users', (ids) => {
+      if (ids) {
+        this.$store.dispatch('setOnlineUsers', ids)
+      }
+    })
+
+    socket.on('user-online', (id) => {
+      if (id) {
+        this.$store.dispatch('setOnline', id)
+      }
+    })
+
+    socket.on('user-offline', (id) => {
+      if (id) {
+        this.$store.dispatch('setOffline', id)
+      }
+    })
+
+    socket.on('new-message', (message) => {
+      this.$store.dispatch('pushMessage', message)
+    })
   },
   computed: {
     me() {
@@ -54,29 +76,37 @@ export default {
 </script>
 
 <style lang="stylus">
-$green-color = #86bb71
-$offline-color = #e38968
+$green-color = #86bb71;
+$offline-color = #e38968;
 
-.online
-  color $green-color
+.online {
+  color: $green-color;
+}
 
-.offline
-  color $offline-color
+.offline {
+  color: $offline-color;
+}
 
-.me
-.offline
-.online
-  margin-right 3px
-  font-size 10px
+.me, .offline, .online {
+  margin-right: 3px;
+  font-size: 10px;
+}
 
-.chat-page
+.chat-page {
   padding: 40px 0;
-  .coversation-section
-    background white
-  h3.info
-    color black
-    text-align center
-    margin-top 20%
-ul
-  list-style none
+
+  .coversation-section {
+    background: white;
+  }
+
+  h3.info {
+    color: black;
+    text-align: center;
+    margin-top: 20%;
+  }
+}
+
+ul {
+  list-style: none;
+}
 </style>
