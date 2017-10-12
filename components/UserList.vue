@@ -12,7 +12,8 @@
           <div class="name" v-text="user.name"></div>
           <div class="status">
             <!-- Let it be for now -->
-            <i class="fa fa-circle online"></i> online
+            <i :class="['fa', 'fa-circle', user.online ? 'online' : 'offline']"></i>
+            {{ user.online ? 'online' : 'offline' }}
           </div>
         </div>
       </li>
@@ -35,6 +36,20 @@ export default {
     selectUserForConversation(recipientUserID) {
       this.$store.dispatch('switchConversation', recipientUserID)
     }
+  },
+  mounted() {
+    this.$socket.on('user-online', (id) => {
+      this.$store.dispatch('setOnline', id)
+    })
+
+    this.$socket.on('user-offline', (id) => {
+      this.$store.dispatch('setOffline', id)
+    })
+
+    this.$socket.on('welcome', (ids) => {
+      console.log('welcome')
+      // this.$store.dispatch('setOnlineUsers', ids)
+    })
   }
 }
 </script>

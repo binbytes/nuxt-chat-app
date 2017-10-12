@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 export const state = () => ({
-  users: [],
+  users: {},
   conversations: {},
   currentConversationId: null,
   recipientUserID: null,
@@ -13,7 +13,7 @@ export const getters = {
     return state.currentConversationId ? state.conversations[state.currentConversationId] : null
   },
   recipientUser (state) {
-    return state.users ? state.users.find(x => x.id === state.recipientUserID) : null
+    return state.users ? state.users[state.recipientUserID] : null
   }
 }
 
@@ -22,9 +22,23 @@ export const mutations = {
     state.fetched = true
   },
   SET_USERS: function (state, users) {
-    state.users = users
+    if (!users) return
+
+    users.forEach(user => {
+      createUser(state, user)
+    })
+  },
+  SET_ONLINE_USERS: function (state, ids) {
+    ids.forEach(id => {
+      Vue.set(state.users[id], 'online', true)
+    })
+  },
+  SET_USER_OFFLINE: function (state, id) {
+    Vue.set(state.users[id], 'online', false)
   },
   SET_CONVERSATIONS: function (state, conversations) {
+    if (!conversations) return
+
     conversations.forEach(conversation => {
       createConversation(state, conversation, this.$socket)
     })
@@ -113,6 +127,18 @@ export const actions = {
       await dispatch('pushMessage', data)
       this.$socket.emit('send-message', data)
     }
+  },
+
+  setOnlineUsers ({ commit }, ids) {
+    commit('SET_ONLINE_USERS', ids)
+  },
+
+  setOnline ({ commit }, id) {
+    commit('SET_ONLINE_USERS', [id])
+  },
+
+  setOffline ({ commit }, id) {
+    commit('SET_USER_OFFLINE', id)
   }
 }
 
@@ -126,4 +152,10 @@ const createConversation = (state, conversation, socket) => {
   if (socket) {
     socket.emit('enter-conversation', conversation._id)
   }
+}
+
+const createUser = (state, user) => {
+  user.online = false
+
+  Vue.set(state.users, user.id, user)
 }

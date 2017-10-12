@@ -87,7 +87,7 @@ export const actions = {
       const userData = await this.$axios.$get(endpoint)
       commit('SET_USER', userData)
 
-      // await this.$store.dispatch('fetchUsers')
+      this.$socket.emit('online-ping', userData.id)
     } catch (e) {
       return dispatch('invalidate')
     }
