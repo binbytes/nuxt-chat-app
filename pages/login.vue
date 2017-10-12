@@ -31,8 +31,8 @@ export default {
   middleware: 'no-auth',
   data() {
     return {
-      username: 'demo6',
-      password: 'demo6',
+      username: null,
+      password: null,
       errors: {}
     }
   },
