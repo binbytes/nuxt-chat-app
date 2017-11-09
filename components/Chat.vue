@@ -43,24 +43,24 @@ export default {
       conversation: 'currentConversation',
       recipient: 'recipientUser'
     }),
-    conversationId() {
+    conversationId () {
       return this.conversation ? this.conversation._id : null
     },
-    messages() {
+    messages () {
       return this.conversation ? this.conversation.messages : []
     },
-    me() {
+    me () {
       return this.$store.state.auth.user
     }
   },
   methods: {
-    pushMessage(message) {
+    pushMessage (message) {
       this.$store.dispatch('sendMessage', message)
     }
   },
   directives: {
     scrollBottom: {
-      componentUpdated(el) {
+      componentUpdated (el) {
         el.scrollTop = el.scrollHeight
       }
     }
@@ -69,133 +69,163 @@ export default {
 </script>
 
 <style lang="stylus">
-$chat-bg = #ffffff
-$box-border = rgba(74, 70, 70, 0.08)
-$text-color = #434651
-$offline-color = #e38968
-$star-color = #d8dadf
-$message-time = #a8aab1
-$green-color = #86bb71
-$blue-color = #94c2ed
+$chat-bg = #ffffff;
+$box-border = rgba(74, 70, 70, 0.08);
+$text-color = #434651;
+$offline-color = #e38968;
+$star-color = #d8dadf;
+$message-time = #a8aab1;
+$green-color = #86bb71;
+$blue-color = #94c2ed;
 
-.chat
-  background $chat-bg
-  border-top-right-radius 5px
-  border-bottom-right-radius 5px
-  color $text-color
+.chat {
+  background: $chat-bg;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  color: $text-color;
 
-  .chat-header
-    padding 20px
-    border-bottom 2px solid $box-border
+  .chat-header {
+    padding: 20px;
+    border-bottom: 2px solid $box-border;
 
-    img
-      float left
-      border-radius 50%
+    img {
+      float: left;
+      border-radius: 50%;
+    }
 
-    .chat-about
-      float left
-      padding-left 10px
-      margin-top 6px
+    .chat-about {
+      float: left;
+      padding-left: 10px;
+      margin-top: 6px;
+    }
 
-    .chat-with
-      font-weight 700
-      font-size 16px
+    .chat-with {
+      font-weight: 700;
+      font-size: 16px;
+    }
 
-    .fa-star
-      float right
-      color $star-color
-      font-size 20px
-      margin-top 12px
+    .fa-star {
+      float: right;
+      color: $star-color;
+      font-size: 20px;
+      margin-top: 12px;
+    }
+  }
 
-  .chat-history
-    padding 30px 30px 20px
-    border-bottom 2px solid $box-border
-    overflow-y scroll
-    height 600px
+  .chat-history {
+    padding: 30px 30px 20px;
+    border-bottom: 2px solid $box-border;
+    overflow-y: scroll;
+    height: 600px;
 
-    li
-      .message-data
-        margin-bottom 15px
-        .fa-circle
-          margin-right 3px
-          font-size 10px
+    li {
+      .message-data {
+        margin-bottom: 15px;
 
-      .message-data-time
-        color $message-time
-        padding-left 6px
-        margin-right 6px
+        .fa-circle {
+          margin-right: 3px;
+          font-size: 10px;
+        }
+      }
 
-      .message-data-name
-        margin-right 7px
+      .message-data-time {
+        color: $message-time;
+        padding-left: 6px;
+        margin-right: 6px;
+      }
 
-      .message
-        color white
-        padding 18px 20px
-        line-height 26px
-        font-size 16px
-        border-radius 7px
-        margin-bottom 30px
-        position relative
-        width 90%
+      .message-data-name {
+        margin-right: 7px;
+      }
 
-        &:after
-          bottom 100%
-          left 7%
-          border solid transparent
-          content " "
-          height 0
-          width 0
-          position absolute
-          pointer-events none
-          border-bottom-color $green-color
-          border-width 10px
-          margin-left -10px
+      .message {
+        color: white;
+        padding: 18px 20px;
+        line-height: 26px;
+        font-size: 16px;
+        border-radius: 7px;
+        margin-bottom: 30px;
+        position: relative;
+        width: 90%;
 
-      &.my-message
-        text-align right
-        .fa-circle
-          color $blue-color
-        .message
-          float right
-          background $blue-color
-          &:after
+        &:after {
+          bottom: 100%;
+          left: 7%;
+          border: solid transparent;
+          content: ' ';
+          height: 0;
+          width: 0;
+          position: absolute;
+          pointer-events: none;
+          border-bottom-color: $green-color;
+          border-width: 10px;
+          margin-left: -10px;
+        }
+      }
+
+      &.my-message {
+        text-align: right;
+
+        .fa-circle {
+          color: $blue-color;
+        }
+
+        .message {
+          float: right;
+          background: $blue-color;
+
+          &:after {
             left: 97%;
-            border-bottom-color $blue-color
+            border-bottom-color: $blue-color;
+          }
+        }
+      }
 
-      &.other-message
-        .fa-circle
-          color $green-color
-        .message
-          background $green-color
+      &.other-message {
+        .fa-circle {
+          color: $green-color;
+        }
 
-  .chat-message
-    padding 30px
+        .message {
+          background: $green-color;
+        }
+      }
+    }
+  }
 
-    textarea
-      width 100%
-      border none
-      padding 10px 20px
-      margin-bottom 10px
-      border-radius 5px
-      resize none
-      background $box-border
+  .chat-message {
+    padding: 30px;
 
-    button
-      float right
-      color #ffffff
-      font-size 16px
-      text-transform uppercase
-      border none
-      cursor pointer
-      font-weight 700
-      background $blue-color
+    textarea {
+      width: 100%;
+      border: none;
+      padding: 10px 20px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      resize: none;
+      background: $box-border;
+    }
 
-.chat .chat-message .fa-file-image-o
-.chat .chat-message .fa-file-o
-  font-size 16px
-  color gray
-  cursor pointer
+    button {
+      float: right;
+      color: #ffffff;
+      font-size: 16px;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      background: $blue-color;
+    }
+  }
+}
 
-.me
-  color $blue-color
+.chat .chat-message .fa-file-image-o, .chat .chat-message .fa-file-o {
+  font-size: 16px;
+  color: gray;
+  cursor: pointer;
+}
+
+.me {
+  color: $blue-color;
+}
 </style>

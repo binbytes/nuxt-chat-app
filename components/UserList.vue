@@ -5,7 +5,7 @@
       <i class="fa fa-search"></i>
     </div>
 
-    <ul class="list">
+    <ul class="list list-reset">
       <li :class="['clearfix', recipientUserID === user.id ? 'active' : '']" v-for="user in users" :key="user.id" @click="selectUserForConversation(user.id)">
         <img :src="user.avatar" alt="avatar" />
         <div class="about">
@@ -25,15 +25,15 @@
 export default {
   name: 'user-list',
   computed: {
-    users() {
+    users () {
       return this.$store.state.users
     },
-    recipientUserID() {
+    recipientUserID () {
       return this.$store.state.recipientUserID
     }
   },
   methods: {
-    selectUserForConversation(recipientUserID) {
+    selectUserForConversation (recipientUserID) {
       this.$store.dispatch('switchConversation', recipientUserID)
     }
   }

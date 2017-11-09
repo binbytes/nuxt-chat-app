@@ -1,23 +1,28 @@
 <template>
-  <div class="chat-page">
-
+  <div class="chat-page container mx-auto">
     <div class="container">
-      <div class="clearfix">
-        <button @click="doLogout" class="button button-clear">Logout</button>
-        <h5 class="float-right" v-if="me">
-          Welcome {{ me.name }}
-        </h5>
-      </div>
-
-      <div class="row">
-        <div class="column column-25">
+      <div class="flex -mx-4">
+        <div class="px-4 w-1/4">
           <user-list></user-list>
         </div>
-
-        <div class="column coversation-section column-75">
+        <div class="px-4 w-3/4">
           <chat></chat>
         </div>
+        <!-- <button @click="doLogout" class="button button-clear">Logout</button>
+                  <h5 class="float-right" v-if="me">
+                    Welcome {{ me.name }}
+                  </h5> -->
       </div>
+
+      <!-- <div class="row">
+                <div class="column column-25">
+                  <user-list></user-list>
+                </div>
+
+                <div class="column coversation-section column-75">
+                  <chat></chat>
+                </div>
+              </div> -->
     </div>
   </div>
 </template>
@@ -35,7 +40,7 @@ export default {
     UserList,
     Chat
   },
-  beforeMount() {
+  beforeMount () {
     this.$store.dispatch('actionAfterLoggedin')
 
     socket.on('online-users', (ids) => {
@@ -61,12 +66,12 @@ export default {
     })
   },
   computed: {
-    me() {
+    me () {
       return this.$store.state.auth.user
     }
   },
   methods: {
-    async doLogout() {
+    async doLogout () {
       await this.$store.dispatch('auth/logout')
 
       this.$router.replace({ path: '/login' })
