@@ -1,7 +1,9 @@
 <template>
-  <div :class="['clearfix p-2 mb-4 border', message.author !== me.id ? 'bg-blue-lightest' : 'text-right bg-grey-light']">
-    <p class="text-lg pb-2" v-text="message.body"></p>
-    <small class="text-grey-dark" v-text="message.createdAt"></small>
+  <div :class="['clearfix mb-4 block', message.author === me.id ? 'text-right' : '']">
+    <div :class="['p-2 inline-block border rounded', message.author !== me.id ? 'bg-blue-lightest' : 'bg-grey-light']">
+      <p class="text-lg pb-2" v-text="message.body"></p>
+      <small class="text-grey-dark" v-text="message.createdAt"></small>
+    </div>
   </div>
 </template>
 

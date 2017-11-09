@@ -1,5 +1,5 @@
 <template>
-  <div class="chat-page container mx-auto">
+  <div class="chat-page container mx-auto mt-6 mb-6">
     <div class="flex -mx-2">
       <div class="flex-1 text-slate text-left py-2 m-1" v-if="me">
 
