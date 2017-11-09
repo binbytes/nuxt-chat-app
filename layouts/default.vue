@@ -6,6 +6,11 @@
 
 <script>
 export default {
-  name: 'default-layout'
+  name: 'default-layout',
+  head: {
+    bodyAttrs: {
+      class: 'bg-grey-lighter font-sans'
+    }
+  }
 }
 </script>

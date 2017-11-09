@@ -1,6 +1,5 @@
 <template>
-  <div class="bg-grey-lighter h-screen font-sans">
-
+  <div class="h-screen">
     <div class="container mx-auto h-full flex justify-center items-center">
       <div class="w-1/3">
         <h1 class="font-hairline mb-6 text-center">Register to Chat app</h1>
