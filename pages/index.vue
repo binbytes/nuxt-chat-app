@@ -1,20 +1,19 @@
 <template>
   <div class="chat-page container mx-auto mt-6 mb-6">
-    <div class="flex -mx-2">
-      <div class="flex-1 text-slate text-left py-2 m-1" v-if="me">
-
+    <div class="flex flex-wrap items-end mb-4">
+      <div class="flex-1 px-2" v-if="me">
         Welcome {{ me.name }}
       </div>
-      <div class="flex-1 text-slate text-right">
+      <div class="flex-1 px-2 text-right">
         <button @click="doLogout" class="btn btn-blue">Logout</button>
       </div>
     </div>
 
-    <div class="flex -mx-4">
-      <div class="px-4 w-1/4">
+    <div class="flex flex-wrap">
+      <div class="w-full px-2 md:w-1/4">
         <user-list></user-list>
       </div>
-      <div class="px-4 w-3/4 bg-white">
+      <div class="w-full px-2 md:w-3/4">
         <chat></chat>
       </div>
     </div>
@@ -89,5 +88,9 @@ $offline-color = #e38968;
 .me, .offline, .online {
   margin-right: 3px;
   font-size: 10px;
+}
+
+.app-height {
+  max-height: 600px;
 }
 </style>
