@@ -10,7 +10,7 @@
 
             <div class="mb-4">
               <label class="font-bold text-grey-darker block mb-2">Name</label>
-              <input type="text" v-model="name" :class="['block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow', errors.username ? 'border-red mb-3' : '']" placeholder="Your Username">
+              <input type="text" v-model="name" :class="['block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow', errors.username ? 'border-red mb-3' : '']" placeholder="Your Name">
               <p v-if="errors.name" class="text-red text-xs italic">Please enter a name.</p>
             </div>
 
