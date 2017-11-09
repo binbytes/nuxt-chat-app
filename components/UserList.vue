@@ -1,7 +1,7 @@
 <template>
   <div class="border rounded bg-white">
     <div class="search p-3 border-b">
-      <input type="text" v-model="filterText" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" placeholder="search" />
+      <input type="text" v-model="filterText" class="input-control" placeholder="Search" />
     </div>
 
     <div class="users app-height overflow-y-scroll">

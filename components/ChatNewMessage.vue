@@ -1,6 +1,6 @@
 <template>
   <div class="border-t align-bottom p-3 w-full">
-    <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker resize-none mb-2" v-model="messageText" placeholder="Type your message" @keyup.enter="sendMessage"></textarea>
+    <textarea class="input-control resize-none mb-2" v-model="messageText" placeholder="Type your message" @keyup.enter="sendMessage"></textarea>
 
     <button @click="sendMessage" class="btn btn-blue pull-right">Send</button>
   </div>
