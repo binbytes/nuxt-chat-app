@@ -1,19 +1,8 @@
 <template>
-  <li :class="['clearfix', message.author !== me.id ? 'other-message' : 'my-message']">
-    <div class="message-data">
-      <div v-if="message.author === me.id">
-        <span class="message-data-time" v-text="message.createdAt"></span>
-        <span class="message-data-name" v-text="me.name"></span>
-        <i class="fa fa-circle"></i>
-      </div>
-      <div v-else>
-        <i class="fa fa-circle"></i>
-        <span class="message-data-name" v-text="recipientUser.name"></span>
-        <span class="message-data-time" v-text="message.createdAt"></span>
-      </div>
-    </div>
-    <div class="message" v-text="message.body"></div>
-  </li>
+  <div :class="['clearfix p-2 mb-4 border', message.author !== me.id ? 'bg-blue-lightest' : 'text-right bg-grey-light']">
+    <p class="text-lg pb-2" v-text="message.body"></p>
+    <small class="text-grey-dark" v-text="message.createdAt"></small>
+  </div>
 </template>
 
 <script>

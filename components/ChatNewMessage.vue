@@ -1,11 +1,8 @@
 <template>
-  <div class="chat-message clearfix">
-    <textarea v-model="messageText" placeholder="Type your message" @keyup.enter="sendMessage" rows="3"></textarea>
+  <div class="border-t align-bottom pt-3 pb-3 absolute pin-b pin-l w-full">
+    <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker no-resize mb-2" v-model="messageText" placeholder="Type your message" @keyup.enter="sendMessage"></textarea>
 
-    <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
-    <i class="fa fa-file-image-o"></i>
-
-    <button @click="sendMessage" class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded">Send</button>
+    <button @click="sendMessage" class="btn btn-blue">Send</button>
   </div>
 </template>
 

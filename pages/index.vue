@@ -1,17 +1,21 @@
 <template>
   <div class="chat-page container mx-auto">
-    <div class="container">
-      <div class="flex -mx-4">
-        <div class="px-4 w-1/4">
-          <user-list></user-list>
-        </div>
-        <div class="px-4 w-3/4">
-          <chat></chat>
-        </div>
-        <!-- <button @click="doLogout" class="button button-clear">Logout</button>
-                    <h5 class="float-right" v-if="me">
-                      Welcome {{ me.name }}
-                    </h5> -->
+    <div class="flex -mx-2">
+      <div class="flex-1 text-slate text-left py-2 m-1" v-if="me">
+
+        Welcome {{ me.name }}
+      </div>
+      <div class="flex-1 text-slate text-right">
+        <button @click="doLogout" class="btn btn-blue">Logout</button>
+      </div>
+    </div>
+
+    <div class="flex -mx-4">
+      <div class="px-4 w-1/4">
+        <user-list></user-list>
+      </div>
+      <div class="px-4 w-3/4 bg-white">
+        <chat></chat>
       </div>
     </div>
   </div>
@@ -85,23 +89,5 @@ $offline-color = #e38968;
 .me, .offline, .online {
   margin-right: 3px;
   font-size: 10px;
-}
-
-.chat-page {
-  padding: 40px 0;
-
-  .coversation-section {
-    background: white;
-  }
-
-  h3.info {
-    color: black;
-    text-align: center;
-    margin-top: 20%;
-  }
-}
-
-ul {
-  list-style: none;
 }
 </style>

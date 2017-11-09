@@ -12,7 +12,8 @@
 </template>
 
 <script>
+// Not in use right now
 export default {
-
+  name: 'chat-typing'
 }
 </script>
