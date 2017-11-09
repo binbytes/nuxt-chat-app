@@ -91,6 +91,10 @@ $offline-color = #e38968;
 }
 
 .app-height {
-  max-height: 600px;
+  height: calc(100vh - 200px);
+}
+
+.chat-history {
+  height: 80%;
 }
 </style>

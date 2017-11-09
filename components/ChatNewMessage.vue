@@ -1,8 +1,8 @@
 <template>
-  <div class="border-t p-4 align-bottom pt-3 pb-3 pin-b pin-l w-full">
-    <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker no-resize mb-2" v-model="messageText" placeholder="Type your message" @keyup.enter="sendMessage"></textarea>
+  <div class="border-t align-bottom p-3 w-full">
+    <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker resize-none mb-2" v-model="messageText" placeholder="Type your message" @keyup.enter="sendMessage"></textarea>
 
-    <button @click="sendMessage" class="btn btn-blue">Send</button>
+    <button @click="sendMessage" class="btn btn-blue pull-right">Send</button>
   </div>
 </template>
 

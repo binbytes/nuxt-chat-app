@@ -4,7 +4,7 @@
       <input type="text" v-model="filterText" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" placeholder="search" />
     </div>
 
-    <div class="users h-full overflow-y-scroll">
+    <div class="users app-height overflow-y-scroll">
       <div :class="['flex items-center cursor-pointer text-sm text-dark-softner border-b p-2', recipientUserID === user.id ? 'bg-grey-light' : '']" v-for="user in filteredUsers" :key="user.id" @click="selectUserForConversation(user.id)">
 
         <img src="/user-avatar.png" alt="avatar" class="rounded-full h-10 w-10" />
