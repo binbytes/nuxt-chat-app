@@ -22,7 +22,7 @@ module.exports = {
   */
   loading: { color: '#3B8070' },
   css: [
-    './node_modules/milligram/dist/milligram.min.css'
+    '~/assets/css/tailwind.css'
   ],
   /*
   ** Customize app manifest

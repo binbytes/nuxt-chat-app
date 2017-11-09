@@ -19,49 +19,49 @@ export const getters = {
 }
 
 export const mutations = {
-  SET_FETCHED: function (state) {
+  SET_FETCHED (state) {
     state.fetched = true
   },
-  SET_USERS: function (state, users) {
+  SET_USERS (state, users) {
     if (!users) return
 
     users.forEach(user => {
       createUser(state, user)
     })
   },
-  SET_ONLINE_USERS: function (state, ids) {
+  SET_ONLINE_USERS (state, ids) {
     ids.forEach(id => {
       if (id && state.users[id]) {
         Vue.set(state.users[id], 'online', true)
       }
     })
   },
-  SET_USER_OFFLINE: function (state, id) {
+  SET_USER_OFFLINE (state, id) {
     Vue.set(state.users[id], 'online', false)
   },
-  SET_CONVERSATIONS: function (state, conversations) {
+  SET_CONVERSATIONS (state, conversations) {
     if (!conversations) return
 
     conversations.forEach(conversation => {
       createConversation(state, conversation)
     })
   },
-  ADD_CONVERSATION: function (state, conversation) {
+  ADD_CONVERSATION (state, conversation) {
     createConversation(state, conversation)
   },
-  SWITCH_CONVERSATION: function (state, id) {
+  SWITCH_CONVERSATION (state, id) {
     state.currentConversationId = id
   },
-  SET_RECIPIENT_USER_ID: function (state, id) {
+  SET_RECIPIENT_USER_ID (state, id) {
     state.recipientUserID = id
   },
-  SET_MESSAGES: function (state, payload) {
+  SET_MESSAGES (state, payload) {
     const conversation = state.conversations[payload.conversationId]
 
     Vue.set(conversation, 'messages', payload.messages)
     Vue.set(conversation, 'fetched', true)
   },
-  PUSH_MESSAGE: function (state, message) {
+  PUSH_MESSAGE (state, message) {
     state.conversations[message.conversationId].messages.push(message)
   }
 }
