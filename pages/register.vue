@@ -33,16 +33,16 @@
 export default {
   name: 'login',
   middleware: 'no-auth',
-  data() {
+  data () {
     return {
-      name: 'demo6',
-      username: 'demo6',
+      name: null,
+      username: null,
       password: null,
       errors: {}
     }
   },
   methods: {
-    async onSubmit() {
+    async onSubmit () {
       // Clear the previous errors
       this.errors = {}
 
