@@ -117,7 +117,7 @@ export const actions = {
 
     // Server side logout
     try {
-      await this.$axios.$get(endpoint)
+      // await this.$axios.$get(endpoint)
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error('Error while logging out', e)
