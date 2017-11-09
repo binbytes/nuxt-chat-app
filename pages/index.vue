@@ -9,20 +9,10 @@
           <chat></chat>
         </div>
         <!-- <button @click="doLogout" class="button button-clear">Logout</button>
-                  <h5 class="float-right" v-if="me">
-                    Welcome {{ me.name }}
-                  </h5> -->
+                    <h5 class="float-right" v-if="me">
+                      Welcome {{ me.name }}
+                    </h5> -->
       </div>
-
-      <!-- <div class="row">
-                <div class="column column-25">
-                  <user-list></user-list>
-                </div>
-
-                <div class="column coversation-section column-75">
-                  <chat></chat>
-                </div>
-              </div> -->
     </div>
   </div>
 </template>
