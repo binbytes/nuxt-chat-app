@@ -5,7 +5,7 @@
     </div>
 
     <div class="users">
-      <div :class="['flex items-center text-xs text-dark-softner border-b p-2', recipientUserID === user.id ? 'bg-grey-light' : '']" v-for="user in filteredUsers" :key="user.id" @click="selectUserForConversation(user.id)">
+      <div :class="['flex items-center cursor-pointer text-sm text-dark-softner border-b p-2', recipientUserID === user.id ? 'bg-grey-light' : '']" v-for="user in filteredUsers" :key="user.id" @click="selectUserForConversation(user.id)">
 
         <img src="/user-avatar.png" alt="avatar" class="rounded-full h-10 w-10" />
 
