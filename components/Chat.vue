@@ -1,5 +1,5 @@
 <template>
-  <div class="chat relative h-full" v-if="recipient">
+  <div class="chat h-full" v-if="recipient">
     <div class="chat-header flex items-center text-xs border-b p-2">
       <img src="/user-avatar.png" alt="avatar" class="rounded-full h-15 w-15 mr-2" />
 
@@ -11,7 +11,7 @@
     </div>
     <!-- end chat-header -->
 
-    <div class="chat-history mt-2 p-5 overflow-x-scroll" v-scroll-bottom>
+    <div class="chat-history mt-2 p-5 h-screen overflow-x-scroll" v-scroll-bottom>
       <template v-for="message in messages">
         <chat-message :me="me" :recipientUser="recipient" :message="message" :key="message.id"></chat-message>
       </template>

@@ -87,7 +87,7 @@ export const actions = {
   },
 
   async switchConversation ({ state, commit }, recipientUserID) {
-    let conversationId = Object.keys(state.conversations).find(id => state.conversations[id].participants.includes(recipientUserID))
+    let conversationId = Object.keys(state.conversations).find(id => state.conversations[id]['participants'] && state.conversations[id].participants.includes(recipientUserID))
 
     if (conversationId) {
       // Fetch messages if not already fetched
@@ -106,12 +106,12 @@ export const actions = {
       }
     } else {
       // create new conversation
-      let conversation = await this.$axios.post('conversation', {
+      let { data } = await this.$axios.post('conversation', {
         recipient: recipientUserID
       })
 
-      commit('ADD_CONVERSATION', conversation)
-      commit('SWITCH_CONVERSATION', conversation._id)
+      commit('ADD_CONVERSATION', data)
+      commit('SWITCH_CONVERSATION', data._id)
     }
 
     commit('SET_RECIPIENT_USER_ID', recipientUserID)
