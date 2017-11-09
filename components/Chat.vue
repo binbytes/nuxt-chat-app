@@ -11,8 +11,8 @@
     </div>
     <!-- end chat-header -->
 
-    <div class="app-height">
-      <div class="chat-history mt-2 p-4 overflow-x-scroll" v-scroll-bottom>
+    <div class="app-height relative" v-bar>
+      <div class="chat-history mt-2 p-4" v-scroll-bottom>
         <template v-for="message in messages">
           <chat-message :me="me" :recipientUser="recipient" :message="message" :key="message.id"></chat-message>
         </template>

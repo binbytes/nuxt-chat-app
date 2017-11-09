@@ -4,16 +4,17 @@
       <input type="text" v-model="filterText" class="input-control" placeholder="Search" />
     </div>
 
-    <div class="users app-height overflow-y-scroll">
-      <div :class="['flex items-center cursor-pointer text-sm text-dark-softner border-b p-2', recipientUserID === user.id ? 'bg-grey-light' : '']" v-for="user in filteredUsers" :key="user.id" @click="selectUserForConversation(user.id)">
+    <div class="users app-height" v-bar>
+      <div>
+        <div :class="['flex items-center cursor-pointer text-sm text-dark-softner border-b p-2', recipientUserID === user.id ? 'bg-grey-light' : '']" v-for="user in filteredUsers" :key="user.id" @click="selectUserForConversation(user.id)">
+          <img src="/user-avatar.png" alt="avatar" class="rounded-full h-10 w-10" />
 
-        <img src="/user-avatar.png" alt="avatar" class="rounded-full h-10 w-10" />
-
-        <div class="about py-2 ml-2">
-          <div class="name pb-2" v-text="user.name"></div>
-          <div class="status">
-            <i :class="['fa', 'fa-circle', user.online ? 'online' : 'offline']"></i>
-            {{ user.online ? 'online' : 'offline' }}
+          <div class="about py-2 ml-2">
+            <div class="name pb-2" v-text="user.name"></div>
+            <div class="status">
+              <i :class="['fa', 'fa-circle', user.online ? 'online' : 'offline']"></i>
+              {{ user.online ? 'online' : 'offline' }}
+            </div>
           </div>
         </div>
       </div>

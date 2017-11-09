@@ -9,7 +9,8 @@
     "cookie": "^0.3.1",
     "js-cookie": "^2.1.4",
     "nuxt": "latest",
-    "socket.io-client": "^2.0.3"
+    "socket.io-client": "^2.0.3",
+    "vuebar": "^0.0.17"
   },
   "scripts": {
     "dev": "nuxt dev",

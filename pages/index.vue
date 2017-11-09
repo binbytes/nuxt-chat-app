@@ -95,6 +95,6 @@ $offline-color = #e38968;
 }
 
 .chat-history {
-  height: 80%;
+  height: 80% !important;
 }
 </style>
