@@ -93,14 +93,19 @@ $offline-color = #e38968;
 .chat {
   box-sizing: border-box;
   height: calc(100vh - 90px);
+  padding-bottom: 125px;
 
   .app-height {
-    padding-top: 97px;
-    padding-bottom: 125px;
+    position: absolute !important;
+    width: 100%;
+    top: 0;
+    height: calc(100% - 97px);
+    margin-top: 97px;
+    padding-bottom: 75px;
   }
 
   .chat-history {
-    height: calc(100% - 10px) !important;
+    height: calc(100% - 60px) !important;
   }
 }
 </style>

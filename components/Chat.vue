@@ -1,7 +1,7 @@
 <template>
   <div class="chat border rounded bg-white relative">
     <template v-if="recipient">
-      <div class="chat-header flex items-center text-xs border-b p-2 absolute p-t p-l w-full">
+      <div class="chat-header flex items-center text-xs border-b p-2 absolute pin-t pin-l w-full">
         <img src="/user-avatar.png" alt="avatar" class="rounded-full h-15 w-15 mr-2" />
 
         <div class="chat-about text-lg">
@@ -12,7 +12,7 @@
       </div>
       <!-- end chat-header -->
 
-      <div class="app-height w-full h-full absolute p-t" v-bar>
+      <div class="app-height w-full h-full absolute pin-t" v-bar>
         <div class="chat-history mt-2 p-4" v-scroll-bottom>
           <template v-for="message in messages">
             <chat-message :me="me" :recipientUser="recipient" :message="message" :key="message.id"></chat-message>
