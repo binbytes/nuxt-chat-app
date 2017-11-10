@@ -90,11 +90,17 @@ $offline-color = #e38968;
   font-size: 10px;
 }
 
-.app-height {
-  height: calc(100vh - 200px);
-}
+.chat {
+  box-sizing: border-box;
+  height: calc(100vh - 90px);
 
-.chat-history {
-  height: 80% !important;
+  .app-height {
+    padding-top: 97px;
+    padding-bottom: 125px;
+  }
+
+  .chat-history {
+    height: calc(100% - 10px) !important;
+  }
 }
 </style>
