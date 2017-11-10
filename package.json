@@ -8,6 +8,7 @@
     "@nuxtjs/pwa": "latest",
     "cookie": "^0.3.1",
     "js-cookie": "^2.1.4",
+    "moment": "^2.19.1",
     "nuxt": "latest",
     "socket.io-client": "^2.0.3",
     "vuebar": "^0.0.17"

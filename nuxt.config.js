@@ -43,7 +43,8 @@ module.exports = {
   plugins: [
     '~/plugins/auth.js',
     '~/plugins/socket.io.js',
-    { src: '~/plugins/vuebar.js', ssr: false }
+    '~/plugins/vuebar.js',
+    '~/plugins/filters.js'
   ],
   /*
   ** Axios settings
