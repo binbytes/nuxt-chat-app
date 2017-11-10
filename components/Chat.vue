@@ -12,7 +12,7 @@
       </div>
       <!-- end chat-header -->
 
-      <div class="app-height w-full h-full absolute pin-t" v-bar>
+      <div class="app-height w-full absolute pin-t" v-bar>
         <div class="chat-history mt-2 p-4" v-scroll-bottom>
           <template v-for="message in messages">
             <chat-message :me="me" :recipientUser="recipient" :message="message" :key="message.id"></chat-message>

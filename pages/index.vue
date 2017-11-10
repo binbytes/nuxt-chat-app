@@ -97,8 +97,6 @@ $offline-color = #e38968;
 
   .app-height {
     position: absolute !important;
-    width: 100%;
-    top: 0;
     height: calc(100% - 97px);
     margin-top: 97px;
     padding-bottom: 75px;
