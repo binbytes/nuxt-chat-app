@@ -1,6 +1,6 @@
-# nuxt-chat-app
+# Chat Application Frontend
 
-> An web chat application built using nuxtjs
+> An frontend of chat application built using nuxt.js
 
 ## Build Setup
 
@@ -19,5 +19,3 @@ $ npm start
 # generate static project
 $ npm run generate
 ```
-
-For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
