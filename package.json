@@ -11,6 +11,9 @@
     "moment": "^2.19.1",
     "nuxt": "latest",
     "socket.io-client": "^2.0.3",
+    "vue-avatar-component": "^1.2.4",
+    "vue-server-renderer": "^2.5.6",
+    "vue-template-compiler": "^2.5.6",
     "vuebar": "^0.0.17"
   },
   "scripts": {
