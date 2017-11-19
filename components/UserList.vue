@@ -29,7 +29,6 @@ import Avatar from 'vue-avatar-component'
 const filtered = (rawObject, searchText) => {
   Object.keys(rawObject).reduce(function (r, e) {
     if (rawObject[e]['username'] == 'nik') {
-      console.log('yes', rawObject[e])
       r[e] = rawObject[e]
     }
     return r;
