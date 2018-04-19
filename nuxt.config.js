@@ -40,7 +40,8 @@ module.exports = {
       '@nuxtjs/pwa', { workbox: false }
     ],
     '@nuxtjs/axios',
-    '@nuxtjs/auth'
+    '@nuxtjs/auth',
+    '@nuxtjs/dotenv'
   ],
   /*
   ** Plugins
