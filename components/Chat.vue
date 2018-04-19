@@ -50,7 +50,7 @@ export default {
       return this.conversation ? this.conversation.messages : []
     },
     me () {
-      return this.$store.state.auth.user
+      return this.$auth.user
     }
   },
   methods: {

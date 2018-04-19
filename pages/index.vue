@@ -60,12 +60,12 @@ export default {
   },
   computed: {
     me () {
-      return this.$store.state.auth.user
+      return this.$auth.user
     }
   },
   methods: {
     async doLogout () {
-      await this.$store.dispatch('auth/logout')
+      await this.$auth.logout()
 
       this.$router.replace({ path: '/login' })
     }

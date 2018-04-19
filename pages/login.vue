@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import socket from '~/plugins/socket.io.js'
+
 export default {
   name: 'login',
   middleware: 'no-auth',
@@ -66,8 +68,15 @@ export default {
       }
 
       try {
-        await this.$store.dispatch('auth/login', this.$data)
-        this.$router.replace({ path: '/' })
+        this.$auth.login({
+          data: {
+            username: this.username,
+            password: this.password
+          }
+        }).then(() => {
+          socket.emit('online-ping', userData.id)
+          this.$router.replace({ path: '/' })
+        })
       } catch ({ response }) {
 
         if (response.status === 422) {

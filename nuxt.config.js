@@ -34,30 +34,47 @@ module.exports = {
   ** Modules
   */
   modules: [
-    ['@nuxtjs/pwa', { workbox: false }],
-    '@nuxtjs/axios'
+    [
+      '@nuxtjs/pwa', { workbox: false }
+    ],
+    '@nuxtjs/axios',
+    '@nuxtjs/auth'
   ],
   /*
   ** Plugins
   */
   plugins: [
-    '~/plugins/auth.js',
     '~/plugins/socket.io.js',
     '~/plugins/vuebar.js',
     '~/plugins/filters.js'
   ],
   /*
+  ** Auth settings
+  */
+  auth: {
+    resetOnError: true,
+    rewriteRedirects: false,
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/auth/login', method: 'post', propertyName: 'token' },
+          logout: { url: '/auth/logout', method: 'post' },
+          user: { url: '/users/me', method: 'get', propertyName: 'user' }
+        },
+        tokenRequired: true,
+        tokenType: '',
+      }
+    }
+  },
+  /*
   ** Axios settings
   */
   axios: {
-    baseURL: process.env.API_BASE_URL || `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3002}/api/`,
-    requestInterceptor: (config, { store }) => {
-      if (store.state.auth.token) {
-        config.headers.common['Authorization'] = store.state.auth.token
-      }
-      return config
-    }
+    baseURL: 'http://localhost:3002/api'
   },
+  /*
+  ** Env
+  */
   env: {
     SOCKET_HOST_URL: process.env.SOCKET_HOST_URL || `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3002}`
   }
