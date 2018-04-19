@@ -9,14 +9,14 @@
 
             <div class="mb-4">
               <label class="font-bold text-grey-darker block mb-2">Username</label>
-              <input type="text" v-model="username" :class="['block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow', errors.username ? 'border-red mb-3' : '']" placeholder="Your Username">
-              <p v-if="errors.username" class="text-red text-xs italic">Please choose a username.</p>
+              <input type="text" name="username" v-validate="'required'" v-model="username" :class="['block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow', errors.has('username') ? 'border-red mb-3' : '']" placeholder="Your Username">
+              <p v-if="errors.has('username')" class="text-red text-xs italic" v-text="errors.first('username')"></p>
             </div>
 
             <div class="mb-4">
               <label class="font-bold text-grey-darker block mb-2">Password</label>
-              <input type="password" v-model="password" :class="['block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow', errors.password ? 'border-red mb-3' : '']" placeholder="Your Password">
-              <p v-if="errors.password" class="text-red text-xs italic">Please choose a password.</p>
+              <input type="password" name="password" v-validate="'required'" v-model="password" :class="['block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow', errors.has('password') ? 'border-red mb-3' : '']" placeholder="Your Password">
+              <p v-if="errors.has('password')" class="text-red text-xs italic" v-text="errors.first('password')">Please choose a password.</p>
             </div>
 
             <div class="flex items-center justify-between">
@@ -44,46 +44,32 @@ export default {
   data () {
     return {
       username: null,
-      password: null,
-      errors: {}
+      password: null
     }
   },
   methods: {
     async onSubmit () {
-      // Clear the previous errors
-      this.errors = {}
+      this.$validator.validateAll().then((result) => {
+        if (result) {
+          this.$auth.login({
+            data: {
+              username: this.username,
+              password: this.password
+            }
+          }).then(() => {
+            this.$router.replace({ path: '/' })
+          }).catch ( ({ response }) => {
 
-      if (!this.username) {
-        this.errors['username'] = true
-      }
+          // if (response.status === 422) {
+          //   this.errors = response.data
+          // }
 
-      if (!this.password) {
-        this.errors['password'] = true
-      }
-
-      if (Object.keys(this.errors).length !== 0) {
-        return
-      }
-
-      try {
-        this.$auth.login({
-          data: {
-            username: this.username,
-            password: this.password
-          }
-        }).then(() => {
-          this.$router.replace({ path: '/' })
-        })
-      } catch ({ response }) {
-
-        if (response.status === 422) {
-          this.errors = response.data
+          // if (response.status === 401) {
+          //   this.$set(this.errors, 'error', response.data.message)
+          // }
+          })
         }
-
-        if (response.status === 401) {
-          this.$set(this.errors, 'error', response.data.message)
-        }
-      }
+      })
     }
   }
 }

@@ -10,20 +10,20 @@
 
             <div class="mb-4">
               <label class="font-bold text-grey-darker block mb-2">Name</label>
-              <input type="text" v-model="name" :class="['block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow', errors.username ? 'border-red mb-3' : '']" placeholder="Your Name">
-              <p v-if="errors.name" class="text-red text-xs italic">Please enter a name.</p>
+              <input type="text" v-model="name" name="name" v-validate="'required'" :class="['block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow', errors.has('name') ? 'border-red mb-3' : '']" placeholder="Your Name">
+              <p v-if="errors.has('name')" class="text-red text-xs italic" v-text="errors.first('name')"></p>
             </div>
 
             <div class="mb-4">
               <label class="font-bold text-grey-darker block mb-2">Username</label>
-              <input type="text" v-model="username" :class="['block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow', errors.username ? 'border-red mb-3' : '']" placeholder="Your Username">
-              <p v-if="errors.username" class="text-red text-xs italic">Please choose a username.</p>
+              <input type="text" v-model="username" name="username" v-validate="'required'" :class="['block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow', errors.has('username') ? 'border-red mb-3' : '']" placeholder="Your Username">
+              <p v-if="errors.has('username')" class="text-red text-xs italic" v-text="errors.first('username')"></p>
             </div>
 
             <div class="mb-4">
               <label class="font-bold text-grey-darker block mb-2">Password</label>
-              <input type="password" v-model="password" :class="['block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow', errors.password ? 'border-red mb-3' : '']" placeholder="Your Password">
-              <p v-if="errors.password" class="text-red text-xs italic">Please choose a password.</p>
+              <input type="password" v-model="password" name="password" v-validate="'required'" :class="['block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow', errors.has('password') ? 'border-red mb-3' : '']" placeholder="Your Password">
+              <p v-if="errors.has('password')" class="text-red text-xs italic" v-text="errors.first('password')"></p>
             </div>
 
             <div class="flex items-center justify-between">
@@ -52,41 +52,22 @@ export default {
     return {
       name: null,
       username: null,
-      password: null,
-      errors: {}
+      password: null
     }
   },
   methods: {
     async onSubmit () {
-      // Clear the previous errors
-      this.errors = {}
+      this.$validator.validateAll().then((result) => {
+        if (!result) return
 
-      if (!this.name) {
-        this.errors['name'] = true
-      }
-
-      if (!this.username) {
-        this.errors['username'] = true
-      }
-
-      if (!this.password) {
-        this.errors['password'] = true
-      }
-
-      if (Object.keys(this.errors).length !== 0) {
-        return
-      }
-
-      try {
-        const { data } = await this.$axios.post('/auth/register', this.$data)
-
-        this.$router.replace({ path: '/', query: 'loggedIn' })
-      } catch ({ response }) {
-
-        if (response.status === 422) {
-          this.errors = response.data
-        }
-      }
+        const { data } = this.$axios.post('/auth/register', this.$data).then(() => {
+          this.$router.replace({ path: '/', query: 'loggedIn' })
+        }).catch(({ response }) => {
+          if (response.status === 422) {
+            // this.errors = response.data
+          }
+        })
+      })
     }
   }
 }

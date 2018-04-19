@@ -48,7 +48,8 @@ module.exports = {
   plugins: [
     '~/plugins/socket.io.js',
     '~/plugins/vuebar.js',
-    '~/plugins/filters.js'
+    '~/plugins/filters.js',
+    '~/plugins/vueValidate.js'
   ],
   /*
   ** Auth settings
