@@ -38,8 +38,6 @@
 </template>
 
 <script>
-import socket from '~/plugins/socket.io.js'
-
 export default {
   name: 'login',
   middleware: 'no-auth',
@@ -74,7 +72,6 @@ export default {
             password: this.password
           }
         }).then(() => {
-          socket.emit('online-ping', userData.id)
           this.$router.replace({ path: '/' })
         })
       } catch ({ response }) {

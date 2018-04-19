@@ -66,7 +66,8 @@ module.exports = {
         tokenRequired: true,
         tokenType: '',
       }
-    }
+    },
+    plugins: [ '~/plugins/auth.js' ]
   },
   /*
   ** Axios settings
