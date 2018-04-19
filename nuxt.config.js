@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 module.exports = {
   mode: 'spa',
   /*
@@ -70,12 +72,6 @@ module.exports = {
   ** Axios settings
   */
   axios: {
-    baseURL: 'http://localhost:3002/api'
-  },
-  /*
-  ** Env
-  */
-  env: {
-    SOCKET_HOST_URL: process.env.SOCKET_HOST_URL || `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3002}`
+    baseURL: process.env.API_URL || 'http://localhost:3002/api'
   }
 }
