@@ -76,5 +76,8 @@ module.exports = {
   */
   axios: {
     baseURL: process.env.API_URL || 'http://localhost:3002/api'
+  },
+  env: {
+    SOCKET_HOST_URL: process.env.SOCKET_HOST_URL || 'http://localhost:3002'
   }
 }
