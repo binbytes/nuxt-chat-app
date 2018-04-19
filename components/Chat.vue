@@ -2,7 +2,9 @@
   <div class="chat border rounded bg-white relative">
     <template v-if="recipient">
       <div class="chat-header flex items-center text-xs border-b p-2 absolute pin-t pin-l w-full">
-        <img src="/user-avatar.png" alt="avatar" class="rounded-full h-15 w-15 mr-2" />
+        <div class="mr-2">
+          <avatar :fullname="recipient.name"></avatar>
+        </div>
 
         <div class="chat-about text-lg">
           <div class="chat-with">Chat with
@@ -31,12 +33,14 @@
 import ChatNewMessage from './ChatNewMessage'
 import ChatMessage from './ChatMessage'
 import { mapGetters } from 'vuex'
+import Avatar from 'vue-avatar-component'
 
 export default {
   name: 'chat',
   components: {
     ChatNewMessage,
-    ChatMessage
+    ChatMessage,
+    Avatar
   },
   computed: {
     ...mapGetters({

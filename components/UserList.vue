@@ -7,7 +7,6 @@
     <div class="users app-height" v-bar>
       <div>
         <div :class="['flex items-center cursor-pointer text-sm text-dark-softner border-b p-2', recipientUserID === user.id ? 'bg-grey-light' : '']" v-for="user in filteredUsers" :key="user.id" @click="selectUserForConversation(user.id)">
-          <!-- <img src="/user-avatar.png" alt="avatar" class="rounded-full h-10 w-10" /> -->
           <avatar :fullname="user.name"></avatar>
 
           <div class="about py-2 ml-2">
