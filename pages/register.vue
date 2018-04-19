@@ -6,7 +6,7 @@
         <form v-on:submit.prevent="onSubmit">
           <div class="border-teal p-8 border-t-12 bg-white mb-6 rounded-lg shadow-lg">
 
-            <div class="error-box text-red text-center mb-4" v-if="errors.error" v-text="errors.error"></div>
+            <div class="error-box text-red text-center mb-4" v-if="errors.has('error')" v-text="errors.first('error')"></div>
 
             <div class="mb-4">
               <label class="font-bold text-grey-darker block mb-2">Name</label>
@@ -65,6 +65,7 @@ export default {
         }).catch(({ response }) => {
           if (response.status === 422) {
             // this.errors = response.data
+            this.$validator.errors.add('error', response.data.error)
           }
         })
       })
